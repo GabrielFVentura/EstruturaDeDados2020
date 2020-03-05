@@ -27,8 +27,8 @@ int main()
 			arrayDeNumeros[i-1] = inputNumero;
 			}
 		}
-		for (int j = 0; j < i; j++)
-		cout << arrayDeNumeros[i] << " ";
+		for (int j = 0; j <= i; j++)
+		cout << arrayDeNumeros[j] << " ";
 		
 		cout << endl;
 	}
