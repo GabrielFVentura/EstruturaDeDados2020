@@ -23,7 +23,7 @@ Cada vez que um número for colocado no vetor o programa deve exibir os números
 
 #include <iostream>
 using namespace std;
-
+//7 3 4 6 2 9 0 1
 int main()
 {
 	int arrayDeNumeros[8];
@@ -37,21 +37,14 @@ int main()
 			arrayDeNumeros[i] = inputNumero;
 		else
 		{
-			if (inputNumero < arrayDeNumeros[i-1] && i < 2)
+			for (int j = 0; j <= i-1; j++)
 			{
-				arrayDeNumeros[i] = arrayDeNumeros[i-1];
-				arrayDeNumeros[i-1] = inputNumero;
-			}
-			else
-			{
-				if (inputNumero < arrayDeNumeros[i])
-					arrayDeNumeros[i+1] = arrayDeNumeros[i];
-					
-				else
+				if (arrayDeNumeros[j] > inputNumero)
 				{
-					arrayDeNumeros[i+1] = arrayDeNumeros[i+2];
-					arrayDeNumeros[i] = inputNumero;
+					arrayDeNumeros[j+1] = arrayDeNumeros[j];
+					arrayDeNumeros[j] = inputNumero;
 				}
+				//TODO VERIFICAR INSERÇÔES NO COMECO E NO FIM
 			}
 		}
 		for (int j = 0; j <= i; j++)
