@@ -21,9 +21,9 @@ int main()
 		{
 			cin >> n[i][j];
 		}
-		cout << endl;
 	}
 	//#1 a linha 2 com a linha 8;
+		cout << "1." << endl;
 		for (int i = 0;i<10;i++)
 		{
 			for (int j = 0;j<10;j++)
@@ -38,7 +38,7 @@ int main()
 		cout << endl;
 		}
 	//#2 a coluna 4 com a coluna 10;
-		cout << endl;
+		cout << "2."<< endl;
 		for (int i = 0;i<10;i++)
 		{
 			for (int j = 0;j<10;j++)
@@ -53,16 +53,21 @@ int main()
 		cout << endl;
 		}
 	//#3 a diagonal principal com a diagonal secundaria
-		cout << endl;
+		cout << "3." << endl;
 		int m = 9;
 		for (int i = 0;i<10;i++)
 		{
 			for (int j = 0;j<10;j++)
 			{
-				if (i == j)
+				if (i == j && i+j!=9)
 				{
-					cout << n[m][m] << " ";
+					cout << n[i][m] << " ";
 					m--;
+					
+				}
+				else if ( i+j == 9 )
+				{
+					cout << n[i][i] << " ";
 				}
 				else
 				{
@@ -71,5 +76,21 @@ int main()
 			}
 		cout << endl;
 		}
+		cout << "4." << endl;
+		//#4 a linha 5 com a coluna 10
+		for (int i = 0;i<10;i++)
+		{
+			for (int j = 0;j<10;j++)
+			{
+				if (i == 4)
+					cout << n[j][9] << " ";
+				else if (j == 9)
+					cout << n[i][4] << " ";
+				else
+					cout << n[i][j] << " ";
+			}
+		cout << endl;
+		}
+		
 		
 }
