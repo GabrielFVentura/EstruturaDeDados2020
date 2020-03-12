@@ -1,74 +1,61 @@
-/*Crie um programa que preencha uma primeira matriz de ordem 4 x 5 e 
-uma segunda matriz 5 x 2. O programa deverá, também, calcular e mostrar a
-matriz resultante do produto matricial das duas matrizes anteriores, armazenando-o 
-em uma terceira matriz de ordem 4 x 2.
+/*
+Na teoria de sistemas define-se como elemento minimax de uma matriz o menor 
+* elemento da linha onde se encontra o maior elemento da matriz. Escreva um programa 
+* que receba uma matriz quadrada de inteiros, 10x10, e retorne seu elemento minimax, 
+* seguido de sua posição. Em caso de números iguais considere o que aparece primeiro.
 
-Entrada:
+Entradas:
 
-    Uma matriz 4 x 5.
-    Uma matriz 5 x 2.
+    Um matriz de inteiros de tamanho 10x10.
 
-Saída:
+Saídas:
 
-    Matriz 4 x 2 resultante do produto entre as duas matrizes anteriores.
-*/
-using namespace std;
+O menor elemento da linha que tem o maior elemento da matriz.
+A linha e a coluna onde está o elemento do item anterior.*/
+
+
 #include <iostream>
+using namespace std;
 
 int main()
 {
-	int MatrizUm[4][5];
-	int MatrizDois[5][2];
-	int MatrizR[4][2];
+	int matriz[10][10];
 	
-	for (int i = 0;i<4;i++)
+	int maior;
+	int posMaior_i = 0;
+		
+	int menor;
+	int posMenor_i = 0;
+	int posMenor_j = 0;
+	
+	for (int i = 0;i < 10;i++)
 	{
-		for (int j = 0;j<5;j++)
+		for (int j = 0; j < 10; j++)
 		{
-			cin >> MatrizUm[i][j];
+			cin >> matriz[i][j];
 		}
 	}
-	for (int i = 0;i<5;i++)
+	for (int i = 0;i < 10;i++)
 	{
-		for (int j = 0;j<2;j++)
+		for (int j = 0; j < 10; j++)
 		{
-			cin >> MatrizDois[i][j];
+			if (matriz[i][j] > maior)
+			{
+				maior = matriz[i][j];
+				posMaior_i = i;
+			}
 		}
 	}
-	int m = 0;
-	int n = 0;
-	for (int i = 0;i<4;i++)
+	for (int j = 0;j < 10; j++)
 	{
-		for (int j = 0;j<5;j++)
+		if (matriz[posMaior_i][j] < menor)
 		{
-			MatrizR[m][n] += MatrizUm[i][j] * MatrizDois[j][i];
-			m++;
+			posMenor_i = posMaior_i;
+			posMenor_j = j;
 		}
-		n++;
+		menor = matriz[posMaior_i][posMenor_j];
 	}
-	cout << endl;
-	for (int i = 0; i < 4; i++)
-	{
-		for (int j = 0; j < 2; j++)
-		{
-			cout << MatrizR[i][j] << " ";
-		}
-	}
-	/*
-	for (int i = 0;i<4;i++)
-	{
-		for (int j = 0;j<5;j++)
-		{
-			cout << MatrizUm[i][j] << " ";
-		}
-		cout << endl;
-	}
-	for (int i = 0;i<5;i++)
-	{
-		for (int j = 0;j<2;j++)
-		{
-			cout << MatrizDois[i][j] << " ";
-		}
-		cout << endl;
-	}*/
+	menor = matriz[posMaior_i][posMenor_j];
+	cout << menor << endl;
+	cout << posMenor_i << " " << posMenor_j << endl;
 }
