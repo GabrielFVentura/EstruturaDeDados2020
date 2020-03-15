@@ -20,12 +20,20 @@ using namespace std;
 
 int main()
 {
-    string TextoASerTestado;
+    char TextoASerTestado[200];
+    int NU_Espacos = 0;
+    char k;
+
     ofstream MeuArquivo("Meu_Arquivo.txt");
-    cin >> TextoASerTestado;
-
-    MeuArquivo << "Vou aproveitar os exercicios do dredd para estudar muito e tirar 100 em IALG!!";
-
+    cin.getline(TextoASerTestado,200);
+    
+    MeuArquivo << TextoASerTestado;
     MeuArquivo.close();
 
+    ifstream MeuArq("Meu_Arquivo.txt");
+
+    while (MeuArq >> k)
+        NU_Espacos++;
+        
+    cout << NU_Espacos;
 }
