@@ -39,6 +39,12 @@ Exemplo de entrada:
 	T 3 4 5
 	R 5 10
 	R 2 2
+Exemplo de saída:
+	Circulo 31.4159 78.5398
+	Circulo 12.5664 12.5664
+	Triangulo 12 6
+	Retangulo 30 50
+	Retangulo 8 4
 	*/
 #include <iostream>
 #include <math.h>
