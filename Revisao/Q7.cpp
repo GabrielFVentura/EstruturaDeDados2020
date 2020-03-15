@@ -41,43 +41,77 @@ Exemplo de entrada:
 	R 2 2
 	*/
 #include <iostream>
-#include <cmath>
+#include <math.h>
 using namespace std;
 	
 	
 class Circulo{
 		public:
-		float CalcularArea(){return raio*raio;};
+		float CalcularArea(){return raio*raio*M_PI;};
 		float CalcularPerimetro(){ return (2*M_PI*raio);};
-		Circulo(int raio){ raio = raio;};
+		Circulo(int r){ raio = r;};
 			
 		private:
 		int raio;
 		
-	};
+};
+
+class Retangulo{
+	public:
+		float CalcularArea(){return x*y;};
+		float CalcularPerimetro(){return (2*x)+(2*y);};
+		Retangulo(int init_x, int init_y)
+		{
+			x = init_x, 
+			y = init_y;
+		};
+	private:
+		int x;
+		int y;
+};
+
+class Triangulo{
+	public:
+		float CalcularArea(){return sqrt(p(x,y,z)*(p(x,y,z)-x)*(p(x,y,z)-y)*(p(x,y,z)-z));};
+		float CalcularPerimetro(){return x+y+z;};
+		Triangulo(int init_x, int init_y, int init_z)
+		{ 
+			x = init_x,
+			y = init_y,
+			z = init_z;
+		}
+	private:
+		float p(int x,int y,int z){return (x+y+z)/2;};
+		int x,y,z;
+};
 	
 int main(){
 	int n;
+	int x,y,z;
 	char c;
-	//for (int i = 0; i < 5; i++)
-	//{
+	for (int i = 0; i < 5; i++)
+	{
 		cin >> c;
 		if (c == 'C')
 		{
 			cin >> n;
 			Circulo Circ(n);
-			cout << Circ.CalcularArea() << endl;
-			cout << Circ.CalcularPerimetro() << endl;
+			cout << "Circulo" << " " << Circ.CalcularPerimetro() << " " << Circ.CalcularArea() << " "  << endl;
 		}
-		
-		//if (c == 'T')
-		
-		//else
-			
-		
-		
-	//}
-	
-	
+		if (c == 'T')
+		{
+			cin >> x >> y >> z;
+			Triangulo Tri(x,y,z);
+			cout << "Triangulo" << " " << Tri.CalcularPerimetro() << " " << Tri.CalcularArea() << " " << endl;			
+		}
+		if (c == 'R')
+		{
+			cin >> x >> y;
+			Retangulo Ret(x,y);
+			cout << "Retangulo" << " " << Ret.CalcularPerimetro() << " " << Ret.CalcularArea() << " "  << endl;
+		}
+		else
+			cout << "Por favor insire uma das letras ('C','T','R') e seus respectivos valores" << endl;
+	}			
 	return 0;
 }
