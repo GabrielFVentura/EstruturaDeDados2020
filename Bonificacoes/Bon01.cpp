@@ -21,35 +21,37 @@ class Atividade{
     friend class Participante;
     friend class Evento;
 
-    public:
-    Atividade(string nome,
-    string resumo,
-    int vagas,
-    string DataRealizacao,
-    string modalidade)
-    {
-        nomeAtividade = nome,
-        resumoAtividade = resumo,
-        vagasDisponiveisAtividade = vagas,
-        DataRealizacaoAtividade = DataRealizacao,
-        modalidadeAtividade = modalidade;
-
-        //event.atividadesOfertadas[event.atividadesCadastradas] = nomeAtividade;
-    };
-
-    void DadosAtividade(){
-        cout << nomeAtividade << endl;
-        cout << resumoAtividade << endl;
-        cout << vagasDisponiveisAtividade << endl;
-        cout << DataRealizacaoAtividade << endl;
-        cout << modalidadeAtividade << endl;};
-
     protected:
         string nomeAtividade;
         string resumoAtividade;
         int vagasDisponiveisAtividade;
         string DataRealizacaoAtividade;
         string modalidadeAtividade;
+
+    public:
+        Atividade(string nome,
+        string resumo,
+        int vagas,
+        string DataRealizacao,
+        string modalidade)
+        {   
+            nomeAtividade = nome,
+            resumoAtividade = resumo,
+            vagasDisponiveisAtividade = vagas,
+            DataRealizacaoAtividade = DataRealizacao,
+            modalidadeAtividade = modalidade;
+
+            //Não funciona, Pq? CadastrarAtividade(string nome);
+        };
+
+    void DadosAtividade()
+        {
+            cout << nomeAtividade << endl;
+            cout << resumoAtividade << endl;
+            cout << vagasDisponiveisAtividade << endl;
+            cout << DataRealizacaoAtividade << endl;
+            cout << modalidadeAtividade << endl;
+        }
 };
 
 class Evento{
@@ -72,13 +74,19 @@ class Evento{
         cout << dataTerminoEvento << endl;
         cout << nomeEvento << endl;
         cout << edicaoEvento << endl;
-        // for (int i = 0; i < atividadesCadastradas;i++)
-        //     {
+        //  for (int i = 0; i < atividadesCadastradas;i++)
+        //      {
         //         cout << atividadesOfertadas[atividadesCadastradas] << endl;
-        //     }
+        //      }
+        }
+        void CadastrarAtividade(string ativNome)
+        {
+            atividadesOfertadas[atividadesCadastradas] = ativNome;    
+            atividadesCadastradas++;
         }
         
     protected:
+        
         string dataInicioEvento;
         string dataTerminoEvento;
         string nomeEvento;
