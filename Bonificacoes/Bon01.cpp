@@ -57,6 +57,14 @@ class Atividade{
 class Evento{
     friend class Atividade;
 
+    protected:
+        string dataInicioEvento;
+        string dataTerminoEvento;
+        string nomeEvento;
+        string edicaoEvento;
+        int atividadesCadastradas = 0;
+        string atividadesOfertadas[10]; //Transformar em array da classe Atividade
+
     public:
         Evento(string dataInicio,
         string dataTermino,
@@ -74,25 +82,15 @@ class Evento{
         cout << dataTerminoEvento << endl;
         cout << nomeEvento << endl;
         cout << edicaoEvento << endl;
-        //  for (int i = 0; i < atividadesCadastradas;i++)
-        //      {
-        //         cout << atividadesOfertadas[atividadesCadastradas] << endl;
-        //      }
+        for (int i = 0; i < atividadesCadastradas; i++)
+                 cout << atividadesOfertadas[i] << endl;
         }
-        void CadastrarAtividade(string ativNome)
+
+        void CadastrarAtividade(Atividade ativ)
         {
-            atividadesOfertadas[atividadesCadastradas] = ativNome;    
+            atividadesOfertadas[atividadesCadastradas] = ativ.nomeAtividade;    
             atividadesCadastradas++;
         }
-        
-    protected:
-        
-        string dataInicioEvento;
-        string dataTerminoEvento;
-        string nomeEvento;
-        string edicaoEvento;
-        int atividadesCadastradas = 0;
-        string atividadesOfertadas[10];
 };
 
 class Participante{
@@ -100,10 +98,10 @@ class Participante{
 
     protected:
     //Como criar um array da classe Atividades[5]?
-    int atividadesInscritas = 0;
-    string atividades[5];
-    string cpfParticipante;
-    string nomeParticipante;
+        int atividadesInscritas = 0;
+        string atividades[5];
+        string cpfParticipante;
+        string nomeParticipante;
 
     public:
     Participante(string nome,
@@ -150,24 +148,24 @@ class Participante{
             cout << atividades[i] << " ";
         cout << endl;
      }
-
-    
 };
 
 int main()
 {
     Evento OIT8("07/07","08/08","OIT8","Quarta Edicao");
-    OIT8.DadosEvento();
 
     Atividade MiniCurso("Minicurso","Um breve curso de algo", 15, "07/07","Minicurso");
+    OIT8.CadastrarAtividade(MiniCurso); // Passar esse método para dentro do construtor da classe Atividade
     cout << endl;
     MiniCurso.DadosAtividade();
 
     Atividade Palestra("Palestra","Um breve palestra de algo", 20, "07/07","Palestra");
+    OIT8.CadastrarAtividade(Palestra);
     cout << endl;
     Palestra.DadosAtividade();
  
     Atividade Oficina("Oficina","Uma breve oficina de algo", 25, "07/07","Minicurso");
+    OIT8.CadastrarAtividade(Oficina);
     cout << endl;
     Oficina.DadosAtividade();
 
@@ -192,4 +190,63 @@ int main()
 
     cout << endl;
     Oficina.DadosAtividade();
+    
+    cout << endl;
+    OIT8.DadosEvento();
 }
+
+/*Resultado:
+        Minicurso
+        Um breve curso de algo
+        15
+        07/07
+        Minicurso
+
+        Palestra
+        Um breve palestra de algo
+        20
+        07/07
+        Palestra
+
+        Oficina
+        Uma breve oficina de algo
+        25
+        07/07
+        Minicurso
+
+        Gabriel
+        151851937-78
+        0
+
+
+        Gabriel
+        151851937-78
+        1
+        Minicurso
+
+        Gabriel
+        151851937-78
+        2
+        Minicurso Oficina
+
+        Inscricao em Oficina Cancelada
+
+        Gabriel
+        151851937-78
+        1
+        Minicurso
+
+        Oficina
+        Uma breve oficina de algo
+        25
+        07/07
+        Minicurso
+
+        07/07
+        08/08
+        OIT8
+        Quarta Edicao
+        Minicurso
+        Palestra
+        Oficina
+*/
