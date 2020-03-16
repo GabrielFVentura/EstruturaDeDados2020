@@ -47,7 +47,7 @@ class Atividade{
             //Não funciona, Pq? CadastrarAtividade(string nome);
         };
 
-    void DadosAtividade()
+    void PrintDadosAtividade()
         {
             cout << nomeAtividade << endl;
             cout << resumoAtividade << endl;
@@ -67,6 +67,8 @@ class Evento{
         string edicaoEvento;
         int atividadesCadastradas = 0;
         string atividadesOfertadas[10]; //Transformar em array da classe Atividade
+        //Atividade atividades[10];
+        
 
     public:
         Evento(string dataInicio,
@@ -80,7 +82,7 @@ class Evento{
             edicaoEvento = edicao;
         }
 
-        void DadosEvento(){
+        void PrintDadosEvento(){
         cout << dataInicioEvento << endl;
         cout << dataTerminoEvento << endl;
         cout << nomeEvento << endl;
@@ -95,6 +97,8 @@ class Evento{
             atividadesCadastradas++;
         }
 };
+
+
 
 class Participante{
     friend class Atividade;
@@ -143,7 +147,7 @@ class Participante{
 
     void ConsultarAtividadesInscritas();
 
-    void DadosParticipante(){
+    void PrintDadosParticipante(){
         cout << nomeParticipante << endl;
         cout << cpfParticipante << endl;
         cout << atividadesInscritas << endl;
@@ -160,42 +164,42 @@ int main()
     Atividade MiniCurso("Minicurso","Um breve curso de algo", 15, "07/07","Minicurso");
     OIT8.CadastrarAtividade(MiniCurso); // Passar esse método para dentro do construtor da classe Atividade
     cout << endl;
-    MiniCurso.DadosAtividade();
+    MiniCurso.PrintDadosAtividade();
 
     Atividade Palestra("Palestra","Um breve palestra de algo", 20, "07/07","Palestra");
     OIT8.CadastrarAtividade(Palestra);
     cout << endl;
-    Palestra.DadosAtividade();
+    Palestra.PrintDadosAtividade();
  
     Atividade Oficina("Oficina","Uma breve oficina de algo", 25, "07/07","Minicurso");
     OIT8.CadastrarAtividade(Oficina);
     cout << endl;
-    Oficina.DadosAtividade();
+    Oficina.PrintDadosAtividade();
 
     Participante Gabriel("Gabriel","151851937-78");
 
     cout << endl;
-    Gabriel.DadosParticipante();
+    Gabriel.PrintDadosParticipante();
 
     Gabriel.InscreverEmAtividade(MiniCurso);
 
     cout << endl;
-    Gabriel.DadosParticipante();
+    Gabriel.PrintDadosParticipante();
 
     Gabriel.InscreverEmAtividade(Oficina);
 
     cout << endl;
-    Gabriel.DadosParticipante();
+    Gabriel.PrintDadosParticipante();
 
     cout << endl;
     Gabriel.CancelarInscricaoEmAtividade(Oficina);
-    Gabriel.DadosParticipante();
+    Gabriel.PrintDadosParticipante();
 
     cout << endl;
-    Oficina.DadosAtividade();
+    Oficina.PrintDadosAtividade();
     
     cout << endl;
-    OIT8.DadosEvento();
+    OIT8.PrintDadosEvento();
 }
 
 /*Resultado:
