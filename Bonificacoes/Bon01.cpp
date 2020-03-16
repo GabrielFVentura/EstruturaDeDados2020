@@ -19,6 +19,7 @@ using namespace std;
 
 class Atividade{
     friend class Participante;
+    friend class Evento;
 
     public:
     Atividade(string nome,
@@ -32,7 +33,10 @@ class Atividade{
         vagasDisponiveisAtividade = vagas,
         DataRealizacaoAtividade = DataRealizacao,
         modalidadeAtividade = modalidade;
-    }
+
+        //event.atividadesOfertadas[event.atividadesCadastradas] = nomeAtividade;
+    };
+
     void DadosAtividade(){
         cout << nomeAtividade << endl;
         cout << resumoAtividade << endl;
@@ -41,43 +45,57 @@ class Atividade{
         cout << modalidadeAtividade << endl;};
 
     protected:
-    string nomeAtividade;
-    string resumoAtividade;
-    int vagasDisponiveisAtividade;
-    string DataRealizacaoAtividade;
-    string modalidadeAtividade;
+        string nomeAtividade;
+        string resumoAtividade;
+        int vagasDisponiveisAtividade;
+        string DataRealizacaoAtividade;
+        string modalidadeAtividade;
 };
 
 class Evento{
+    friend class Atividade;
+
     public:
         Evento(string dataInicio,
         string dataTermino,
         string nome,
-        string edicao,
-        string atividades)
+        string edicao)
         {
             dataInicioEvento = dataInicio,
             dataTerminoEvento = dataTermino,
             nomeEvento = nome,
             edicaoEvento = edicao;
-            atividadesOfertadas = atividades;
-        };
+        }
+
         void DadosEvento(){
         cout << dataInicioEvento << endl;
         cout << dataTerminoEvento << endl;
         cout << nomeEvento << endl;
         cout << edicaoEvento << endl;
-        cout << atividadesOfertadas << endl;};
+        // for (int i = 0; i < atividadesCadastradas;i++)
+        //     {
+        //         cout << atividadesOfertadas[atividadesCadastradas] << endl;
+        //     }
+        }
+        
     protected:
         string dataInicioEvento;
         string dataTerminoEvento;
         string nomeEvento;
         string edicaoEvento;
-        string atividadesOfertadas;
+        int atividadesCadastradas = 0;
+        string atividadesOfertadas[10];
 };
 
 class Participante{
     friend class Atividade;
+
+    protected:
+    //Como criar um array da classe Atividades[5]?
+    int atividadesInscritas = 0;
+    string atividades[5];
+    string cpfParticipante;
+    string nomeParticipante;
 
     public:
     Participante(string nome,
@@ -103,11 +121,19 @@ class Participante{
 
     void InscreverEmAtividade(Atividade ativ)
     {
-        atividades[atividadesInscritas] = ativ.nomeAtividade;
-        atividadesInscritas++;
+        if (ativ.vagasDisponiveisAtividade > 0)
+        {
+            atividades[atividadesInscritas] = ativ.nomeAtividade;
+            atividadesInscritas++;
+            ativ.vagasDisponiveisAtividade--;;
+        }
+        else
+            cout << "Não há mais vagas nesse curso";
+        
     };
 
     void ConsultarAtividadesInscritas();
+
     void DadosParticipante(){
         cout << nomeParticipante << endl;
         cout << cpfParticipante << endl;
@@ -117,28 +143,23 @@ class Participante{
         cout << endl;
      }
 
-    protected:
-    //Como criar um array da classe Atividades[5]?
-    int atividadesInscritas = 0;
-    string atividades[5];
-    string cpfParticipante;
-    string nomeParticipante;
+    
 };
 
 int main()
 {
-    Evento event("07/07","08/08","OIT8","Quarta Edicao","Atividades");
-    event.DadosEvento();
+    Evento OIT8("07/07","08/08","OIT8","Quarta Edicao");
+    OIT8.DadosEvento();
 
     Atividade MiniCurso("Minicurso","Um breve curso de algo", 15, "07/07","Minicurso");
     cout << endl;
     MiniCurso.DadosAtividade();
 
-    Atividade Palestra("Palestra","Um breve palestra de algo", 15, "07/07","Palestra");
+    Atividade Palestra("Palestra","Um breve palestra de algo", 20, "07/07","Palestra");
     cout << endl;
     Palestra.DadosAtividade();
-
-    Atividade Oficina("Oficina","Uma breve oficina de algo", 15, "07/07","Minicurso");
+ 
+    Atividade Oficina("Oficina","Uma breve oficina de algo", 25, "07/07","Minicurso");
     cout << endl;
     Oficina.DadosAtividade();
 
@@ -161,9 +182,6 @@ int main()
     Gabriel.CancelarInscricaoEmAtividade(Oficina);
     Gabriel.DadosParticipante();
 
-
-    
-    
-    
-
+    cout << endl;
+    Oficina.DadosAtividade();
 }
