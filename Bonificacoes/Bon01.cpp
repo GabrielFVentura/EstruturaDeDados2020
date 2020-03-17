@@ -35,7 +35,7 @@ class Evento{
         
        
     public:
-		int atividadesCadastradas = 0;
+	int atividadesCadastradas = 0;
         string atividadesOfertadas[10]; //Transformar em array da classe Atividade
         //Atividade atividades[10];       <<<
     
@@ -44,7 +44,7 @@ class Evento{
         string nome,
         string edicao)
         {
-			nomeEvento = nome,
+	    nomeEvento = nome,
             dataInicioEvento = dataInicio,
             dataTerminoEvento = dataTermino,
             edicaoEvento = edicao;
