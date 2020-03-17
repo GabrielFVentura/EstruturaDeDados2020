@@ -19,7 +19,7 @@ Implemente o código necessário, utilizando classes, para solucionar o problema
 //TODO IMPLEMENTAR MÉTODO PARA PROCURAR POR CPF #3 R:#1
 using namespace std;
 #include <iostream>
-
+//IMPLEMENTAR CLASSE ATIVIDADE "VAZIA" PARA SER RECONHECIDA PELA CLASSE EVENTO
 class Atividade{
     friend class Participante;
     friend class Evento;
@@ -27,7 +27,7 @@ class Atividade{
     protected:
         string nomeAtividade;
         string resumoAtividade;
-        int vagasDisponiveisAtividade;
+        int vagasDisponiveisAtividade = 0;
         string DataRealizacaoAtividade;
         string modalidadeAtividade;
 
