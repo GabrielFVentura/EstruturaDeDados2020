@@ -14,8 +14,8 @@ você se inscreveu através do seu CPF.
 
 Implemente o código necessário, utilizando classes, para solucionar o problema apresentado.
 */
-//TODO CRIAR ARRAY DE PARTICIPANTES #1
-//TODO IMPLEMENTAR ARRAY DE ATIVIDADES #2
+//TODO CRIAR ARRAY DE PARTICIPANTES NA CLASSE ATIVIDADE #1
+//TODO IMPLEMENTAR ARRAY DE ATIVIDADES NA CLASSE EVENTO #2
 //TODO IMPLEMENTAR MÉTODO PARA PROCURAR POR CPF #3 R:#1
 using namespace std;
 #include <iostream>
@@ -27,7 +27,7 @@ class Atividade{
     protected:
         string nomeAtividade;
         string resumoAtividade;
-        int vagasDisponiveisAtividade = 0;
+        int vagasDisponiveisAtividade;
         string DataRealizacaoAtividade;
         string modalidadeAtividade;
 
