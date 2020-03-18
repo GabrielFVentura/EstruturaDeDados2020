@@ -32,10 +32,9 @@ class Evento{
         string dataTerminoEvento;
         string nomeEvento;
         string edicaoEvento;
-        
        
     public:
-	int atividadesCadastradas = 0;
+	    int atividadesCadastradas = 0;
         string atividadesOfertadas[10]; //Transformar em array da classe Atividade
         //Atividade atividades[10];       <<<
     
@@ -44,7 +43,7 @@ class Evento{
         string nome,
         string edicao)
         {
-	    nomeEvento = nome,
+	        nomeEvento = nome,
             dataInicioEvento = dataInicio,
             dataTerminoEvento = dataTermino,
             edicaoEvento = edicao;
@@ -66,8 +65,8 @@ class Evento{
 };
 
 class Atividade{
-    friend class Participante;
     friend class Evento;
+    friend class Participante;
 
     protected:
         string nomeAtividade;
@@ -75,8 +74,11 @@ class Atividade{
         int vagasDisponiveisAtividade;
         string DataRealizacaoAtividade;
         string modalidadeAtividade;
-
+        
     public:
+        string cpfsInscritosParticipante[20];//Transformar em um array dinamico
+        int cpfsInscritos = 0;
+
         Atividade(Evento event,
         string nome,
         string resumo,
@@ -101,6 +103,12 @@ class Atividade{
 				cout << DataRealizacaoAtividade << endl;
 				cout << modalidadeAtividade << endl;
 			}
+
+        //void InscreverCpfEmAtividade(Participante part)
+        //{
+          //  cpfsInscritosParticipante[cpfsInscritos] = part.cpfParticipante;
+           // cpfsInscritos++;
+        //}
 		
 		//void ProcurarAtividadesPorCPF(Participante part)
 		//{
@@ -138,7 +146,8 @@ class Participante{
 			{
 				atividadesParticipante[atividadesInscritas] = ativ.nomeAtividade;
 				atividadesInscritas++;
-				ativ.vagasDisponiveisAtividade--;;
+				ativ.vagasDisponiveisAtividade--;
+                //InscreverCpfEmAtividade(cpfParticipante);
 			}
 			else
 				cout << "Não há mais vagas nesse curso";  
