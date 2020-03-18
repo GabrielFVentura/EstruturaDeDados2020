@@ -36,7 +36,7 @@ class Evento{
     public:
 	    int atividadesCadastradas = 0;
         string atividadesOfertadas[10]; //Transformar em array da classe Atividade
-        //Atividade atividades[10];       <<<
+        //Atividade atividades[10];
     
         Evento(string dataInicio,
         string dataTermino,
@@ -79,7 +79,7 @@ class Atividade{
         string cpfsInscritosParticipante[20];//Transformar em um array dinamico
         int cpfsInscritos = 0;
 
-        Atividade(Evento event,
+        Atividade(Evento *event,
         string nome,
         string resumo,
         int vagas,
@@ -92,7 +92,7 @@ class Atividade{
             DataRealizacaoAtividade = DataRealizacao,
             modalidadeAtividade = modalidade;
             
-            event.CadastrarAtividade(nomeAtividade);
+            event->CadastrarAtividade(nomeAtividade);
         };
 
 		void PrintDadosAtividade()
@@ -183,15 +183,15 @@ int main()
 {
     Evento OIT8("07/07","08/08","OIT8","Quarta Edicao");
 
-    Atividade MiniCurso(OIT8,"Minicurso","Um breve curso de algo", 15, "07/07","Minicurso");
+    Atividade MiniCurso(&OIT8,"Minicurso","Um breve curso de algo", 15, "07/07","Minicurso");
     cout << endl;
     MiniCurso.PrintDadosAtividade();
-
-    Atividade Palestra(OIT8,"Palestra","Um breve palestra de algo", 20, "07/07","Palestra");
+    
+    Atividade Palestra(&OIT8,"Palestra","Um breve palestra de algo", 20, "07/07","Palestra");
     cout << endl;
     Palestra.PrintDadosAtividade();
  
-    Atividade Oficina(OIT8,"Oficina","Uma breve oficina de algo", 25, "07/07","Minicurso");
+    Atividade Oficina(&OIT8,"Oficina","Uma breve oficina de algo", 25, "07/07","Minicurso");
     cout << endl;
     Oficina.PrintDadosAtividade();
 
