@@ -86,7 +86,7 @@ class Evento{
 };
 
 Atividade::Atividade(Evento *event,
-        string nome,
+        string nome,                                                                                                    
         string resumo,
         int vagas,
         string DataRealizacao,
@@ -98,7 +98,7 @@ Atividade::Atividade(Evento *event,
             DataRealizacaoAtividade = DataRealizacao,
             modalidadeAtividade = modalidade;
             
-            event->CadastrarAtividade(nomeAtividade);
+            event->CadastrarAtividade(nomeAtividade);//Como cadastrar esse proprio objeto que tá sendo criado?
         };
         
         
@@ -116,7 +116,8 @@ class Participante{
 
     protected:
     //Como criar um array da classe Atividades[5]?
-        int atividadesInscritas = 0;
+        //int atividadesInscritas = 0;
+        //Atividade atividadesParticipante[5];
         string atividadesParticipante[5];
         string cpfParticipante;
         string nomeParticipante;

@@ -52,11 +52,28 @@ class Pilha{
     private:
         Noh* topoNoh;
         unsigned int tamanhoPilha;
-        LimparPilha();
-
+        LimparPilha()
+        {
+            while(topoNoh != NULL)
+            {
+                Noh* NohRemovido = topoNoh;
+                topoNoh =  topoNoh->proximoNoh;
+                delete NohRemovido;
+                tamanhoPilha--;
+            }
+            topoNoh = NULL;
+        }
 };
 
 int main()
 {
+    Pilha pilha;
+    for (Dado i = 0; i < 10; i++)
+        pilha.EmpilharNoh(i);
+
+    for (Dado i = 0; i < 10; i++)
+        cout << pilha.DesempilharNoh() << " ";
+
+    cout << endl;    
     return 0;
 }
