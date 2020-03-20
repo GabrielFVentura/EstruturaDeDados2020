@@ -1,5 +1,5 @@
-/*Usando o código com as especificações de métodos e atributos mais um programa que usa a classe Pilha, crie uma classe pilha com armazenamento dinâmico.
 
+/*Usando o código com as especificações de métodos e atributos mais um programa que usa a classe Pilha, crie uma classe pilha com armazenamento dinâmico.
 O método Desempilhar deve escrever alguma mensagem de erro na saída de erros quando não for possível desempilhar.
 
 Entradas:
@@ -12,11 +12,11 @@ l: para limpar (remover todos) os itens da pilha
 t: para consultar o tamanho da pilha
 e: para espiar o topo da pilha (escreve o topo sem removê-lo)
 f: para finalizar a execução do programa
-Saídas:
 
-Todas as saídas de comandos já estão implementadas na função principal. Ao terminar a execução do programa, todos os itens da pilha são desempilhados e escritos, mesmo assim, o destrutor deve desalocar memória de todos os itens da pilha.
+Saídas:Todas as saídas de comandos já estão implementadas na função principal. Ao terminar a execução do programa, todos os itens da pilha são desempilhados e escritos, mesmo assim, o destrutor deve desalocar memória de todos os itens da pilha.
 
 Exemplo de Entrada e Saída juntas:
+
 
 i 2
 i 4
@@ -80,18 +80,41 @@ Pilha::~Pilha() {
 }
 
 Dado Pilha::Desempilhar() {
+    Noh* mPtAux = mPtTopo;
+    Dado removido = mPtAux->mDado;
+    
+    mPtTopo = mPtTopo->mPtProx;
+    
+    delete mPtAux;
+    mTamanho--;
+    return removido;
 }
 
 void Pilha::Empilhar(const Dado& d) {
+    Noh* novo = new Noh();
+    novo->mPtProx = mPtTopo;  
+    mPtTopo = novo;
+    novo->mDado = d;
+    mTamanho++;
 }
 
 void Pilha::LimparTudo() {
+    while (mPtTopo!=NULL)
+    {
+        Noh* aux = mPtTopo;
+        mPtTopo = mPtTopo->mPtProx;
+        delete aux;
+        mTamanho--;
+    }
+    mPtTopo = NULL;
 }
 
 Dado Pilha::Topo() const {
+    return mPtTopo->mDado;
 }
 
 bool Pilha::Vazia() const {
+    return mPtTopo == NULL;
 }
 
 int main() {
