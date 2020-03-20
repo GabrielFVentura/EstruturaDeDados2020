@@ -15,6 +15,7 @@ Entradas:
 
 Cinco valores a serem empilhados
 Quatro valores a serem empilhados
+
 Saídas:
 
 Três elementos desempilhados
@@ -75,7 +76,7 @@ void pilhav::empilha(Dado ValorInserido)
     dados[posTopo+1] = ValorInserido;
     tamanho++;
     posTopo++;
-    --capacidade;
+    capacidade--;
 }
 
 Dado pilhav::desempilha()
@@ -83,7 +84,6 @@ Dado pilhav::desempilha()
     Dado removido = dados[posTopo];
     tamanho--;
     posTopo--;
-    capacidade++;
     return removido;
 }
 
@@ -95,7 +95,7 @@ Dado pilhav::espia()
 void pilhav::depura()
 {
     for (int i = 0; i < tamanho; i++)
-        cout << dados[i] << endl;
+        cout << dados[i] << " ";
 
     cout << endl;
 }
@@ -117,7 +117,9 @@ int main()
     }
 
     for (int i = 0; i < 3; i++)
-        pilha.desempilha();
+        cout << pilha.desempilha() << " ";
+        
+    cout << endl;
 
     for (int i = 0; i < 4; i++)
     {
@@ -126,7 +128,9 @@ int main()
     }
 
     for (int i = 0; i < 3; i++)
-        pilha.desempilha();
+        cout << pilha.desempilha() << " ";
+
+    cout << endl;
 
     cout << pilha.espia() << endl;
 

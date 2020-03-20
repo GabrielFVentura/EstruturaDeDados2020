@@ -71,9 +71,12 @@ class Pilha {
 using namespace std;
 
 Pilha::Pilha() {
+    mPtTopo = NULL;
+    mTamanho = 0;
 }
 
 Pilha::~Pilha() {
+    LimparTudo();
 }
 
 Dado Pilha::Desempilhar() {
