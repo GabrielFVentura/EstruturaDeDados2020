@@ -129,12 +129,14 @@ class Participante{
 
     protected:
     //Como criar um array da classe Atividades[5]? // Número máximo de Atividades que um Participante pode se Inscrever
+        
         int atividadesInscritas = 0;
         string atividadesParticipante[5];
         string cpfParticipante;
         string nomeParticipante;
 
     public:
+        
 		Participante(string nome,
 		string cpf)
 		{

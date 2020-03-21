@@ -116,7 +116,7 @@ class Participante{
 
     protected:
     //Como criar um array da classe Atividades[5]?
-        //int atividadesInscritas = 0;
+        int atividadesInscritas = 0;
         //Atividade atividadesParticipante[5];
         string atividadesParticipante[5];
         string cpfParticipante;
