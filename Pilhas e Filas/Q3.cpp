@@ -51,24 +51,27 @@ nao 2 1*/
 using namespace std;
 typedef char Letra;
 
-class Noh{
+class Noh
+{
     friend class Pilha;
-    private:
-        Noh* nohProximo;
-        Letra w;
+
+private:
+    Noh *nohProximo;
+    Letra w;
 };
 
 class Pilha
 {
-    public:
-        Pilha();
-        void Empilhar(Letra w);
-        Letra Desempilhar();
+public:
+    Pilha();
+    void Empilhar(Letra w);
+    Letra Desempilhar();
+    int Tamanho() { return tamanho; };
+    bool Vazio() { return tamanho == 0; };
 
-
-    private:
-        Noh* nohTopo;
-        unsigned tamanho;
+private:
+    Noh *nohTopo;
+    unsigned tamanho;
 };
 
 Pilha::Pilha()
@@ -79,7 +82,7 @@ Pilha::Pilha()
 
 void Pilha::Empilhar(Letra l)
 {
-    Noh* novo = new Noh();
+    Noh *novo = new Noh();
     novo->nohProximo = nohTopo;
     novo->w = l;
     nohTopo = novo;
@@ -88,7 +91,7 @@ void Pilha::Empilhar(Letra l)
 
 Letra Pilha::Desempilhar()
 {
-    Noh* deletarNoh = nohTopo;
+    Noh *deletarNoh = nohTopo;
     Letra removido = deletarNoh->w;
     nohTopo = nohTopo->nohProximo;
 
@@ -98,25 +101,66 @@ Letra Pilha::Desempilhar()
     return removido;
 }
 
+void PilhasVazias(Pilha pil1, Pilha pil2)
+{
+    //cout << pil1.Vazio()<< endl;
+    //cout << pil2.Vazio()<< endl;
+    if (pil1.Vazio() && pil2.Vazio())
+        cout << "sim" << " ";
+    else
+        cout << "nao";
+}
+
 int main()
 {
     Pilha PilhaAs;
     Pilha PilhaCs;
-    int contadorDeCs = 0;
+    bool primeiroB = false;
+    bool segundoB = false;
     int contadorDeAs = 0;
     string N;
     cin >> N;
     int i = 0;
-
-    for (int i = 0; i < N.size();i++)
+    while(i < N.size())
     {
-        if (N[i] != 'B')
+        while (primeiroB == false)
         {
             if (N[i] == 'A')
-                contadorDeAs++;
-            else
-                contadorDeCs++;
+            {
+                PilhaAs.Empilhar('A');
+                PilhaCs.Empilhar('C');
+                PilhaCs.Empilhar('C');
+            }
+            if (N[i] == 'B')
+            {
+                cout << "cheguei no primeiro B" << endl;
+                primeiroB = true;
+            }
+            i++;
+        }
+
+        while (segundoB == false)
+        {
+            if (N[i] == 'C')
+            {
+                PilhaCs.Desempilhar();
+            }
+            else if (N[i] == 'B')
+            {
+                cout << "cheguei no segundo B" << endl;
+                segundoB = true;
+            }
+            i++;
+        }
+        cout << "estou na terceira interacao";
+        while (N[i] == 'A')
+        {
+            cout << "estou dentro do if da terceira interacao";
+            PilhaAs.Desempilhar();
+            i++;
         }
     }
-    return 0;
+    cout << "sai da terceira interacao" << endl;
+    cout << PilhaAs.Tamanho() << " " << PilhaCs.Tamanho();
+    PilhasVazias(PilhaAs, PilhaCs);
 }
