@@ -35,7 +35,7 @@ class Evento{
        
     public:
 	    int atividadesCadastradas = 0;
-        string atividadesOfertadas[10]; //Transformar em array da classe Atividade
+        string atividadesOfertadas[10]; //Transformar em array da classe Atividade para armazenar as Atividades cadastradas
         //Atividade atividades[10];
     
         Evento(string dataInicio,
@@ -55,9 +55,11 @@ class Evento{
 			cout << edicaoEvento << endl;
 			cout << dataInicioEvento << endl;
 			cout << dataTerminoEvento << endl;
+            for (int i = 0;i<atividadesCadastradas;i++)
+                cout << atividadesOfertadas[i] << " ";
         }
 
-        void CadastrarAtividade(string nomeAtividade) // Pq não incrementa atividadesCadastradas quando chama CadastrarAtividade
+        void CadastrarAtividade(string nomeAtividade) // 
         {
             atividadesOfertadas[atividadesCadastradas] = nomeAtividade;    
             atividadesCadastradas++;
@@ -76,7 +78,7 @@ class Atividade{
         string modalidadeAtividade;
         
     public:
-        string cpfsInscritosParticipante[20];//Transformar em um array dinamico
+        string cpfsInscritosParticipante[20];//Transformar em um array dinamico e/ou igualar ao número maximo de inscritos em uma Atividade
         int cpfsInscritos = 0;
 
         Atividade(Evento *event,
@@ -104,13 +106,13 @@ class Atividade{
 				cout << modalidadeAtividade << endl;
 			}
 
-        //void InscreverCpfEmAtividade(Participante part)
+        //void InscreverCpfEmAtividade(Participante part) // Método para ser chamado quando um participante se cadastrar em uma Atividade
         //{
           //  cpfsInscritosParticipante[cpfsInscritos] = part.cpfParticipante;
            // cpfsInscritos++;
         //}
 		
-		//void ProcurarAtividadesPorCPF(Participante part)
+		//void ProcurarAtividadesPorCPF(Participante part) // Método para acessar o Array de Atividades do Evento e verificar se dentro dele está cadastrado o respectivo CPF
 		//{
 			//for (int i = 0;i < atividadesCadastradas;i++)
 			//{
@@ -126,7 +128,7 @@ class Participante{
     friend class Atividade;
 
     protected:
-    //Como criar um array da classe Atividades[5]?
+    //Como criar um array da classe Atividades[5]? // Número máximo de Atividades que um Participante pode se Inscrever
         int atividadesInscritas = 0;
         string atividadesParticipante[5];
         string cpfParticipante;
@@ -219,63 +221,58 @@ int main()
     
     cout << endl;
     OIT8.PrintDadosEvento();
-    
-    cout << OIT8.atividadesCadastradas;
-    cout << OIT8.atividadesOfertadas[0]; //imprime nada
-    
 }
 
 /*Resultado:
-        Minicurso
-		Um breve curso de algo
-		15
-		07/07
-		Minicurso
+Minicurso
+Um breve curso de algo
+15
+07/07
+Minicurso
 
-		Palestra
-		Um breve palestra de algo
-		20
-		07/07
-		Palestra
+Palestra
+Um breve palestra de algo
+20
+07/07
+Palestra
 
-		Oficina
-		Uma breve oficina de algo
-		25
-		07/07
-		Minicurso
+Oficina
+Uma breve oficina de algo
+25
+07/07
+Minicurso
 
-		Gabriel
-		151851937-78
-		0
+Gabriel
+151851937-78
+0
 
 
-		Gabriel
-		151851937-78
-		1
-		Minicurso 
+Gabriel
+151851937-78
+1
+Minicurso
 
-		Gabriel
-		151851937-78
-		2
-		Minicurso Oficina 
+Gabriel
+151851937-78
+2
+Minicurso Oficina
 
-		Inscricao em Oficina para o participante Gabriel Cancelada
+Inscricao em Oficina para o participante Gabriel Cancelada
 
-		Gabriel
-		151851937-78
-		1
-		Minicurso 
+Gabriel
+151851937-78
+1
+Minicurso
 
-		Oficina
-		Uma breve oficina de algo
-		25
-		07/07
-		Minicurso
+Oficina
+Uma breve oficina de algo
+25
+07/07
+Minicurso
 
-		OIT8
-		Quarta Edicao
-		07/07
-		08/08
-		0
-
+OIT8
+Quarta Edicao
+07/07
+08/08
+Minicurso Palestra Oficina
 		*/
