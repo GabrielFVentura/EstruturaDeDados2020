@@ -24,168 +24,187 @@ class Evento;
 //class Atividade;
 class Participante;
 
-class Atividade{
+class Atividade
+{
     friend class Evento;
     friend class Participante;
-    
-    public:
+
+public:
     void PrintDadosAtividade();
     Atividade(Evento *event,
-        string nome,
-        string resumo,
-        int vagas,
-        string DataRealizacao,
-        string modalidade);
+              string nome,
+              string resumo,
+              int vagas,
+              string DataRealizacao,
+              string modalidade);
 
-    protected:
-        string nomeAtividade;
-        string resumoAtividade;
-        int vagasDisponiveisAtividade;
-        string DataRealizacaoAtividade;
-        string modalidadeAtividade;
+protected:
+    string nomeAtividade;
+    string resumoAtividade;
+    int vagasDisponiveisAtividade;
+    string DataRealizacaoAtividade;
+    string modalidadeAtividade;
 };
 
-class Evento{
+class Evento
+{
     friend class Atividade;
 
-    protected:
-        string dataInicioEvento;
-        string dataTerminoEvento;
-        string nomeEvento;
-        string edicaoEvento;
-       
-    public:
-	    int atividadesCadastradas = 0;
-        string atividadesOfertadas[10]; //Transformar em array da classe Atividade
-        Atividade *atividades[10];
-    
-        Evento(string dataInicio,
-        string dataTermino,
-        string nome,
-        string edicao)
-        {
-	        nomeEvento = nome,
-            dataInicioEvento = dataInicio,
-            dataTerminoEvento = dataTermino,
-            edicaoEvento = edicao;
-        }
+protected:
+    string dataInicioEvento;
+    string dataTerminoEvento;
+    string nomeEvento;
+    string edicaoEvento;
 
-        void PrintDadosEvento()
-        {
-			cout << nomeEvento << endl;
-			cout << edicaoEvento << endl;
-			cout << dataInicioEvento << endl;
-			cout << dataTerminoEvento << endl;
-        }
+public:
+    int atividadesCadastradas = 0;
+    string atividadesOfertadas[10]; //Transformar em array da classe Atividade
+    Atividade *atividades[10];
 
-        void CadastrarAtividade(string nomeAtividade) // Pq não incrementa atividadesCadastradas quando chama CadastrarAtividade
-        {
-            atividadesOfertadas[atividadesCadastradas] = nomeAtividade;    
-            atividadesCadastradas++;
-        }
+    Evento(string dataInicio,
+           string dataTermino,
+           string nome,
+           string edicao);
+    void PrintDadosEvento();
+    void CadastrarAtividade(string nomeAtividade);
 };
+
+class Participante
+{
+    friend class Atividade;
+
+protected:
+    //Como criar um array da classe Atividades[5]?
+    int atividadesInscritas = 0;
+    //Atividade *atividadesParticipante[5]; //Atividades em que o Participante está inscrito
+    string atividadesParticipante[5];
+    string cpfParticipante;
+    string nomeParticipante;
+
+public:
+    Participante(string nome, string cpf);
+    void InscreverEmAtividade(Atividade ativ);
+    void CancelarInscricaoEmAtividade(Atividade ativ);
+    void ConsultarAtividadesInscritas();
+    void PrintDadosParticipante();
+};
+
+//METODOS EVENTO//
+
+Evento::Evento(string dataInicio,
+               string dataTermino,
+               string nome,
+               string edicao)
+{
+    nomeEvento = nome,
+    dataInicioEvento = dataInicio,
+    dataTerminoEvento = dataTermino,
+    edicaoEvento = edicao;
+}
+
+
+void Evento::PrintDadosEvento()
+{
+    cout << nomeEvento << endl;
+    cout << edicaoEvento << endl;
+    cout << dataInicioEvento << endl;
+    cout << dataTerminoEvento << endl;
+}
+void Evento::CadastrarAtividade(string nomeAtividade)
+{
+    atividadesOfertadas[atividadesCadastradas] = nomeAtividade;
+    atividadesCadastradas++;
+}
+
+//METODOS ATIVIDADE//
 
 Atividade::Atividade(Evento *event,
-        string nome,                                                                                                    
-        string resumo,
-        int vagas,
-        string DataRealizacao,
-        string modalidade)
-        {   
-            nomeAtividade = nome,
-            resumoAtividade = resumo,
-            vagasDisponiveisAtividade = vagas,
-            DataRealizacaoAtividade = DataRealizacao,
-            modalidadeAtividade = modalidade;
-            
-            event->CadastrarAtividade(nomeAtividade);//Como cadastrar esse proprio objeto que tá sendo criado?
-        };
-        
-        
-void Atividade::PrintDadosAtividade()
-			{
-				cout << nomeAtividade << endl;
-				cout << resumoAtividade << endl;
-				cout << vagasDisponiveisAtividade << endl;
-				cout << DataRealizacaoAtividade << endl;
-				cout << modalidadeAtividade << endl;
-			};
+                     string nome,
+                     string resumo,
+                     int vagas,
+                     string DataRealizacao,
+                     string modalidade)
+{
+    nomeAtividade = nome,
+    resumoAtividade = resumo,
+    vagasDisponiveisAtividade = vagas,
+    DataRealizacaoAtividade = DataRealizacao,
+    modalidadeAtividade = modalidade;
 
-class Participante{
-    friend class Atividade;
-
-    protected:
-    //Como criar um array da classe Atividades[5]?
-        int atividadesInscritas = 0;
-        //Atividade *atividadesParticipante[5]; //Atividades inscritas pela 
-        string atividadesParticipante[5];
-        string cpfParticipante;
-        string nomeParticipante;
-
-    public:
-		Participante(string nome,
-		string cpf)
-		{
-			nomeParticipante = nome,
-			cpfParticipante = cpf;
-		}
-		
-		void InscreverEmAtividade(Atividade ativ)
-		{
-			if (ativ.vagasDisponiveisAtividade > 0)
-			{
-				atividadesParticipante[atividadesInscritas] = ativ.nomeAtividade;
-				atividadesInscritas++;
-				ativ.vagasDisponiveisAtividade--;
-                //InscreverCpfEmAtividade(cpfParticipante);
-			}
-			else
-				cout << "Não há mais vagas nesse curso";  
-		};
-
-	void CancelarInscricaoEmAtividade(Atividade ativ)
-		{
-			for (int i = 0;i < atividadesInscritas;i++)
-			{
-				if (atividadesParticipante[i] == ativ.nomeAtividade)
-				{
-					atividadesParticipante[i] == "";
-					atividadesInscritas--;
-					cout << "Inscricao em " << atividadesParticipante[i] << " para o participante " << nomeParticipante << " Cancelada" << endl;
-				}
-			}
-			cout << endl;
-		}
-		
-    void ConsultarAtividadesInscritas();
-
-    void PrintDadosParticipante(){
-        cout << nomeParticipante << endl;
-        cout << cpfParticipante << endl;
-        cout << atividadesInscritas << endl;
-        for (int i = 0;i<atividadesInscritas;i++)
-            cout << atividadesParticipante[i] << " ";
-        cout << endl;
-     }
+    event->CadastrarAtividade(nomeAtividade); //Como cadastrar esse proprio objeto que tá sendo criado?
 };
+
+void Atividade::PrintDadosAtividade()
+{
+    cout << nomeAtividade << endl;
+    cout << resumoAtividade << endl;
+    cout << vagasDisponiveisAtividade << endl;
+    cout << DataRealizacaoAtividade << endl;
+    cout << modalidadeAtividade << endl;
+};
+
+//METODOS PARTICIPANTE//
+
+Participante::Participante(string nome, string cpf)
+{
+    nomeParticipante = nome,
+    cpfParticipante = cpf;
+};
+
+void Participante::InscreverEmAtividade(Atividade ativ)
+{
+    if (ativ.vagasDisponiveisAtividade > 0)
+    {
+        atividadesParticipante[atividadesInscritas] = ativ.nomeAtividade;
+        atividadesInscritas++;
+        ativ.vagasDisponiveisAtividade--;
+        //InscreverCpfEmAtividade(cpfParticipante);
+    }
+    else
+        cout << "Não há mais vagas nesse curso";
+}
+
+void Participante::CancelarInscricaoEmAtividade(Atividade ativ)
+{
+    for (int i = 0; i < atividadesInscritas; i++)
+    {
+        if (atividadesParticipante[i] == ativ.nomeAtividade)
+        {
+            atividadesParticipante[i] == "";
+            atividadesInscritas--;
+            cout << "Inscricao em " << atividadesParticipante[i] << " para o participante " << nomeParticipante << " Cancelada" << endl;
+        }
+    }
+    cout << endl;
+}
+
+void Participante::PrintDadosParticipante()
+{
+    cout << nomeParticipante << endl;
+    cout << cpfParticipante << endl;
+    cout << atividadesInscritas << endl;
+    for (int i = 0; i < atividadesInscritas; i++)
+        cout << atividadesParticipante[i] << " ";
+    cout << endl;
+}
 
 int main()
 {
-    Evento OIT8("07/07","08/08","OIT8","Quarta Edicao");
+    Evento OIT8("07/07", "08/08", "OIT8", "Quarta Edicao");
 
-    Atividade MiniCurso(&OIT8,"Minicurso","Um breve curso de algo", 15, "07/07","Minicurso");
+    Atividade MiniCurso(&OIT8, "Minicurso", "Um breve curso de algo", 15, "07/07", "Minicurso");
     cout << endl;
     MiniCurso.PrintDadosAtividade();
-    
-    Atividade Palestra(&OIT8,"Palestra","Um breve palestra de algo", 20, "07/07","Palestra");
+
+    Atividade Palestra(&OIT8, "Palestra", "Um breve palestra de algo", 20, "07/07", "Palestra");
     cout << endl;
     Palestra.PrintDadosAtividade();
- 
-    Atividade Oficina(&OIT8,"Oficina","Uma breve oficina de algo", 25, "07/07","Minicurso");
+
+    Atividade Oficina(&OIT8, "Oficina", "Uma breve oficina de algo", 25, "07/07", "Minicurso");
     cout << endl;
     Oficina.PrintDadosAtividade();
 
-    Participante Gabriel("Gabriel","151851937-78");
+    Participante Gabriel("Gabriel", "151851937-78");
 
     cout << endl;
     Gabriel.PrintDadosParticipante();
@@ -206,13 +225,12 @@ int main()
 
     cout << endl;
     Oficina.PrintDadosAtividade();
-    
+
     cout << endl;
     OIT8.PrintDadosEvento();
-    
+
     cout << OIT8.atividadesCadastradas << endl;
     cout << OIT8.atividadesOfertadas[0]; //imprime nada
-    
 }
 
 /*Resultado:
