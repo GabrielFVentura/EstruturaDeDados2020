@@ -74,7 +74,6 @@ class Participante
     friend class Atividade;
 
 protected:
-    //Como criar um array da classe Atividades[5]?
     int atividadesInscritas = 0;
     //Atividade *atividadesParticipante[5]; //Atividades em que o Participante está inscrito,
     string atividadesParticipante[5];
@@ -101,7 +100,6 @@ Evento::Evento(string dataInicio,
     dataTerminoEvento = dataTermino,
     edicaoEvento = edicao;
 }
-
 
 void Evento::PrintDadosEvento()
 {
