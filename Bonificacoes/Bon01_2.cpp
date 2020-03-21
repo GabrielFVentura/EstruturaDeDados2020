@@ -66,7 +66,7 @@ public:
            string nome,
            string edicao);
     void PrintDadosEvento();
-    void CadastrarAtividade(string nomeAtividade);
+    void CadastrarAtividade(string nomeAtividade); // Transformar isso para receber como parametro uma Atividade e registrar no array de Atividades de Evento
 };
 
 class Participante
@@ -76,7 +76,7 @@ class Participante
 protected:
     //Como criar um array da classe Atividades[5]?
     int atividadesInscritas = 0;
-    //Atividade *atividadesParticipante[5]; //Atividades em que o Participante está inscrito
+    //Atividade *atividadesParticipante[5]; //Atividades em que o Participante está inscrito,
     string atividadesParticipante[5];
     string cpfParticipante;
     string nomeParticipante;
