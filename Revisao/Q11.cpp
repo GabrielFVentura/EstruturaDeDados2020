@@ -30,3 +30,36 @@ ricci.txt
 Arquivo de saída (ricci.txt):
 
 0 2 8 34 144 610 2584 10946 46368 196418 832040 3524578 14930352 63245986*/
+#include <iostream>
+#include <fstream>
+
+using namespace std;
+
+int fib(int n)
+{
+    if (n == 0)
+        return 0;
+    if (n == 1)
+        return 1;
+    else if (n >= 2)
+        return (fib(n-1) + fib(n-2));
+}
+
+int main()
+{
+    string nomeArquivo = "";
+    int NFib = 0;
+    cin >> nomeArquivo;
+    cin >> NFib;
+
+    ofstream MeuArquivo(nomeArquivo);
+
+    for (int i = 0;i<NFib;i++)
+    {
+        if (fib(i)%2 == 0)
+        MeuArquivo << fib(i) << " ";
+    }
+    MeuArquivo.close();
+    return 0;
+
+}

@@ -1,8 +1,12 @@
-/*Faça um programa que leia tarefas de um arquivo tipado, leia uma data representando a data de hoje e escreva quais as tarefas que devem ser feitas na data indicada
+/*Faça um programa que leia tarefas de um arquivo tipado, leia uma data representando a data de hoje e escreva 
+quais as tarefas que devem ser feitas na data indicada
 
-Para encurtar o desenvolvimento do programa, o programa pode ser feito supondo o arquivo tipado já existe e já tem as informações nele. Para testar o seu programa, você pode usar o arquivo de exemplo. Não mude o nome do arquivo.
+Para encurtar o desenvolvimento do programa, o programa pode ser feito supondo o arquivo tipado já existe e
+ já tem as informações nele. Para testar o seu programa, você pode usar o arquivo de exemplo. 
+ Não mude o nome do arquivo.
 
-A comparação entre datas deve ser feita numa sub-rotina específica para isto. Um bom planejamento dos parâmetros é parte da avaliação.
+A comparação entre datas deve ser feita numa sub-rotina específica para isto. Um bom planejamento dos 
+parâmetros é parte da avaliação.
 
 O arquivo com tarefas tem o seguinte formato:
 

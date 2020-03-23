@@ -116,8 +116,6 @@ int main(){
 			Retangulo Ret(x,y);
 			cout << "Retangulo" << " " << Ret.CalcularPerimetro() << " " << Ret.CalcularArea() << " "  << endl;
 		}
-		else
-			cout << "Por favor insire uma das letras ('C','T','R') e seus respectivos valores" << endl;
 	}			
 	return 0;
 }

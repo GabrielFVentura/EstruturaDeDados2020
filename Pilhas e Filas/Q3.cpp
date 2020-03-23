@@ -111,56 +111,58 @@ void PilhasVazias(Pilha pil1, Pilha pil2)
         cout << "nao";
 }
 
+bool CompararMetades(int A1,int B1, int C1,int A2, int B2, int C2)
+{
+    return (A1 == A2 && B1 == B2 && C1 == C2);
+}
+
 int main()
 {
     Pilha PilhaAs;
     Pilha PilhaCs;
     bool primeiroB = false;
     bool segundoB = false;
-    int contadorDeAs = 0;
+    int contadorDeAsAntes = 0;
+    int contadorDeBsAntes = 0;
+    int contadorDeCsAntes = 0;
+
+    int contadorDeAsDps = 0;
+    int contadorDeBsDps = 0;
+    int contadorDeCsDps = 0;
+
     string N;
     cin >> N;
     int i = 0;
-    while(i < N.size())
+    for (int i = 0;i<N.size()/2;i++)
     {
-        while (primeiroB == false)
-        {
-            if (N[i] == 'A')
-            {
-                PilhaAs.Empilhar('A');
-                PilhaCs.Empilhar('C');
-                PilhaCs.Empilhar('C');
-            }
-            if (N[i] == 'B')
-            {
-                cout << "cheguei no primeiro B" << endl;
-                primeiroB = true;
-            }
-            i++;
-        }
-
-        while (segundoB == false)
-        {
-            if (N[i] == 'C')
-            {
-                PilhaCs.Desempilhar();
-            }
-            else if (N[i] == 'B')
-            {
-                cout << "cheguei no segundo B" << endl;
-                segundoB = true;
-            }
-            i++;
-        }
-        cout << "estou na terceira interacao";
-        while (N[i] == 'A')
-        {
-            cout << "estou dentro do if da terceira interacao";
-            PilhaAs.Desempilhar();
-            i++;
-        }
+        if (N[i] == 'A')
+            contadorDeAsAntes++;
+        if (N[i] == 'B')
+            contadorDeBsAntes++;
+        else if (N[i] == 'C')
+            contadorDeCsAntes++;
     }
-    cout << "sai da terceira interacao" << endl;
-    cout << PilhaAs.Tamanho() << " " << PilhaCs.Tamanho();
-    PilhasVazias(PilhaAs, PilhaCs);
+    for (int i = N.size()/2;i<N.size();i++)
+    {
+        if (N[i] == 'A')
+            contadorDeAsDps++;
+        if (N[i] == 'B')
+            contadorDeBsDps++;
+        else if (N[i] == 'C')
+            contadorDeCsDps++;
+    }
+    for (int i = 0;i<contadorDeAsAntes;i++)
+    {
+        PilhaAs.Empilhar('A');
+        PilhaAs.Empilhar('C');
+        PilhaAs.Empilhar('C');
+    }
+
+    cout << contadorDeAsAntes << " " << contadorDeBsAntes << " " << contadorDeCsAntes << endl;
+    cout << contadorDeAsDps << " " << contadorDeBsDps << " " << contadorDeCsDps << endl;
+    
+    cout << CompararMetades(contadorDeAsAntes,contadorDeBsAntes,contadorDeCsAntes,contadorDeAsDps,contadorDeBsDps,contadorDeCsDps);
+
+    //cout << PilhaAs.Tamanho() << " " << PilhaCs.Tamanho();
+    //PilhasVazias(PilhaAs, PilhaCs);
 }
