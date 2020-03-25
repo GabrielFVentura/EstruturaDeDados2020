@@ -108,46 +108,56 @@ bool Pilha::vazia() {
 }
 
 int main() {
-    char textoInserido[254];
+    bool LiFechaParenteses = false;
+    bool LiAbreParenteses = false;
 
-    cin.getline(cin,textoInserido);
-    int tamanhoTexto = sizeof(textoInserido);
+    string textoInserido = "";
+    getline(cin,textoInserido);
 
     Pilha PilhaTexto;
     Pilha PilhaAbreParenteses;
     Pilha PilhaFechaParenteses;
     
-    for(int i = 0;i < tamanhoTexto;i++)
+    for(int i = 0;i < textoInserido.size();i++)
     {
-        cout << textoInserido[i];
-        // if (textoInserido[i] == '(')
-        // {
-        //     PilhaAbreParenteses.empilha('(');
-        // }
-        // else if (textoInserido[i] == ')')
-        // {
-        //     PilhaFechaParenteses.empilha(')');
-        // }
-        // else
-        // {
-        //     PilhaTexto.empilha(textoInserido[i]);
-        // }
+         if (textoInserido[i] == '(' && LiAbreParenteses == false)
+         {
+            PilhaAbreParenteses.empilha('(');
+            LiAbreParenteses = true;
+            LiFechaParenteses = false;
+         }
+         else if (textoInserido[i] == '(' && LiAbreParenteses == true)
+         {
+             cout << i;
+         }
+         else if (textoInserido[i] == ')' && LiFechaParenteses == false)
+         {
+            PilhaFechaParenteses.empilha(')');
+            LiFechaParenteses = false;
+            LiAbreParenteses = true;
+         }
+         else if (textoInserido[i] == ')' && LiFechaParenteses == true)
+         {
+            cout << i;
+         }
+         else
+         {
+             PilhaTexto.empilha(textoInserido[i]);
+         }
+         
     }
-    // while(!PilhaTexto.vazia())
-    //     cout << PilhaTexto.desempilha();
-
-    // while(!PilhaAbreParenteses.vazia())
-    //     cout << PilhaAbreParenteses.desempilha();
-
-    // while(!PilhaFechaParenteses.vazia())
-    //     cout << PilhaFechaParenteses.desempilha();
-
-    cout << endl << textoInserido;
-
-    // while(!PilhaAbreParenteses.vazia())
-    //     cout << PilhaAbreParenteses.desempilha();
-
-    // while(!PilhaFechaParenteses.vazia())
-    //     cout << PilhaFechaParenteses.desempilha();
+    //  while(!PilhaTexto.vazia())
+        //  cout << PilhaTexto.desempilha(); 
+    // cout << endl;
+    //  while(!PilhaAbreParenteses.vazia())
+        //  cout << PilhaAbreParenteses.desempilha();
+    // cout << endl;
+    //  while(!PilhaFechaParenteses.vazia())
+        //  cout << PilhaFechaParenteses.desempilha();
+    // cout << endl;
+        
+    if (PilhaAbreParenteses.vazia() && PilhaFechaParenteses.vazia())
+        cout << "correto";
+    
     return 0;
 }
