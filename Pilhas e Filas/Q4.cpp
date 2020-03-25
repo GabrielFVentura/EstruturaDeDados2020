@@ -1,10 +1,17 @@
-/*Faça um programa que lê uma linha de texto e verifica se todo parênteses tem um correspondente. Assuma que cada sinal de "fecha parênteses" fecha o último "abre parênteses".
+/*Faça um programa que lê uma linha de texto e verifica se todo parênteses tem um correspondente. 
+Assuma que cada sinal de "fecha parênteses" fecha o último "abre parênteses".
 
-Caso não existam parênteses correspondentes em todos os casos, o programa deve escrever a posição do erro. A posição do primeiro caractere é zero. Se todos os parênteses têm correspondentes, o programa deverá escrever "correto" (letras minúsculas). A posição do erro no caso de um "fecha parênteses" sem correspondente é a dele mesmo, pois não é preciso olhar o resto do texto para saber que há erro. A posição do erro no caso de um "abre parênteses" sem correspondente é a do último "abre parênteses" visto, pois só é possível saber que ele não tem correspondente ao final do texto.
+Caso não existam parênteses correspondentes em todos os casos, o programa deve escrever a posição do erro. 
+A posição do primeiro caractere é zero. Se todos os parênteses têm correspondentes,
+o programa deverá escrever "correto" (letras minúsculas). A posição do erro no caso de um "fecha parênteses" 
+sem correspondente é a dele mesmo, pois não é preciso olhar o resto do texto para saber que há erro. 
+A posição do erro no caso de um "abre parênteses" sem correspondente é a do último "abre parênteses" visto, 
+pois só é possível saber que ele não tem correspondente ao final do texto.
 
 É permitido usar esse código que já tem o tipo Pilha implementado.
 
-Este é um exercício de solução de problema usando pilha. A pilha deve ser parte importante da solução. A classe Pilha não deve ser alterada.
+Este é um exercício de solução de problema usando pilha. A pilha deve ser parte importante da solução. 
+A classe Pilha não deve ser alterada.
 
 Entradas:
 
@@ -34,7 +41,7 @@ Exemplo de Saída 3:
 #include <iostream>
 #include <string>
 
-typedef int TipoDado;
+typedef char TipoDado;
 
 using namespace std;
 
@@ -101,5 +108,46 @@ bool Pilha::vazia() {
 }
 
 int main() {
+    char textoInserido[254];
+
+    cin.getline(cin,textoInserido);
+    int tamanhoTexto = sizeof(textoInserido);
+
+    Pilha PilhaTexto;
+    Pilha PilhaAbreParenteses;
+    Pilha PilhaFechaParenteses;
+    
+    for(int i = 0;i < tamanhoTexto;i++)
+    {
+        cout << textoInserido[i];
+        // if (textoInserido[i] == '(')
+        // {
+        //     PilhaAbreParenteses.empilha('(');
+        // }
+        // else if (textoInserido[i] == ')')
+        // {
+        //     PilhaFechaParenteses.empilha(')');
+        // }
+        // else
+        // {
+        //     PilhaTexto.empilha(textoInserido[i]);
+        // }
+    }
+    // while(!PilhaTexto.vazia())
+    //     cout << PilhaTexto.desempilha();
+
+    // while(!PilhaAbreParenteses.vazia())
+    //     cout << PilhaAbreParenteses.desempilha();
+
+    // while(!PilhaFechaParenteses.vazia())
+    //     cout << PilhaFechaParenteses.desempilha();
+
+    cout << endl << textoInserido;
+
+    // while(!PilhaAbreParenteses.vazia())
+    //     cout << PilhaAbreParenteses.desempilha();
+
+    // while(!PilhaFechaParenteses.vazia())
+    //     cout << PilhaFechaParenteses.desempilha();
     return 0;
 }
