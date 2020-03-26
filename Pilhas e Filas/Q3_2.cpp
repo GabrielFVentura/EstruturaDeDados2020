@@ -101,14 +101,12 @@ Letra Pilha::Desempilhar()
     return removido;
 }
 
-string PilhasVazias(Pilha pil1, Pilha pil2)
+void PilhasVazias(Pilha pil1, Pilha pil2)
 {
-    //cout << pil1.Vazio()<< endl;
-    //cout << pil2.Vazio()<< endl;
     if (pil1.Vazio() && pil2.Vazio())
-        return "sim";
+        cout << "sim" << " " << pil1.Tamanho() << " " << pil2.Tamanho();
     else
-        return "nao";
+        cout << "nao" << " " << pil1.Tamanho() << " "<< pil2.Tamanho();
 }
 
 bool CompararMetades(int A1,int B1, int C1,int A2, int B2, int C2)
@@ -122,10 +120,11 @@ int main()
     Pilha PilhaCs;
     bool primeiroB = false;
     bool segundoB = false;
+
     string texto;
     cin >> texto;
     unsigned int i = 0;
-    while (i < texto.length())
+    while (i < texto.size())
     {
         while(primeiroB == false)
         {
@@ -151,5 +150,5 @@ int main()
             PilhaAs.Desempilhar();
         i++;
     }
-    cout << PilhasVazias(PilhaAs,PilhaCs) << " " << PilhaAs.Tamanho() << " " << PilhaCs.Tamanho() << endl;
+    PilhasVazias(PilhaAs,PilhaCs);
 }

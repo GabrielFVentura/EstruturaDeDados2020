@@ -128,7 +128,8 @@ int main() {
          }
          else if (textoInserido[i] == '(' && LiAbreParenteses == true)
          {
-             cout << i;
+            cout << i;
+            return 0;
          }
          else if (textoInserido[i] == ')' && LiFechaParenteses == false)
          {
@@ -139,6 +140,7 @@ int main() {
          else if (textoInserido[i] == ')' && LiFechaParenteses == true)
          {
             cout << i;
+            return 0;
          }
          else
          {
@@ -155,6 +157,11 @@ int main() {
     //  while(!PilhaFechaParenteses.vazia())
         //  cout << PilhaFechaParenteses.desempilha();
     // cout << endl;
+    while ((!PilhaAbreParenteses.vazia()) || (!PilhaFechaParenteses.vazia()))
+    {
+        PilhaAbreParenteses.desempilha();
+        PilhaFechaParenteses.desempilha();
+    }
         
     if (PilhaAbreParenteses.vazia() && PilhaFechaParenteses.vazia())
         cout << "correto";
