@@ -157,7 +157,7 @@ int main() {
     //  while(!PilhaFechaParenteses.vazia())
         //  cout << PilhaFechaParenteses.desempilha();
     // cout << endl;
-    while ((!PilhaAbreParenteses.vazia()) || (!PilhaFechaParenteses.vazia()))
+    while ((!PilhaAbreParenteses.vazia()) or (!PilhaFechaParenteses.vazia()))
     {
         PilhaAbreParenteses.desempilha();
         PilhaFechaParenteses.desempilha();

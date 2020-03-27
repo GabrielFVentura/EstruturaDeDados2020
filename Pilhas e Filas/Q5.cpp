@@ -71,24 +71,56 @@ class Fila {
 using namespace std;
 
 Fila::Fila() {
+    mTamanho = 0;
+    mUltimo = NULL;
+    mPrimeiro = NULL;
 }
 
 Fila::~Fila() {
+    while (mPrimeiro != NULL)
+        Remover();
 }
 
 void Fila::Inserir(const Dado& d) {
+    Noh* novo = new Noh;
+
+    novo->mPtProx = NULL;
+    novo->mDado = d;
+
+    if (mUltimo != NULL)
+        mUltimo->mPtProx = novo;
+
+    if (Vazia())
+        mPrimeiro = novo;
+    mTamanho++;
 }
 
 Dado Fila::Remover() {
+    Dado DadoRemovido;
+    DadoRemovido = mPrimeiro->mDado;
+    Noh* aux = new Noh;
+    aux = mPrimeiro;
+    mPrimeiro = mPrimeiro->mPtProx;
+    
+    if (Vazia())
+        mUltimo = NULL;
+
+    delete aux;
+    mTamanho--;
+    return DadoRemovido;
 }
 
 Dado Fila::Proximo() const {
+    return mPrimeiro->mDado;
 }
 
 void Fila::LimparTudo() {
+    while (!Vazia())
+        Remover();
 }
 
 bool Fila::Vazia() const {
+    return (mPrimeiro == NULL);
 }
 
 int main() {
