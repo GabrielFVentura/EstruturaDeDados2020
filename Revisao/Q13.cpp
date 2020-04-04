@@ -31,3 +31,12 @@ Exemplo de entrada (arquivo numeros.txt):
 Exemplo de saída (arquivo frase.txt):
 
 eu vou pra maracangalha eu vou*/
+using namespace std;
+#include <iostream>
+#include <fstream>
+int main()
+{
+
+
+
+}

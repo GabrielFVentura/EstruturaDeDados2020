@@ -71,9 +71,9 @@ class Fila {
 using namespace std;
 
 Fila::Fila() {
-    mTamanho = 0;
-    mUltimo = NULL;
     mPrimeiro = NULL;
+    mUltimo = NULL;
+    mTamanho = 0;
 }
 
 Fila::~Fila() {
@@ -83,9 +83,8 @@ Fila::~Fila() {
 
 void Fila::Inserir(const Dado& d) {
     Noh* novo = new Noh;
-
-    novo->mPtProx = NULL;
     novo->mDado = d;
+    novo->mPtProx = NULL;
 
     if (mUltimo != NULL)
         mUltimo->mPtProx = novo;
@@ -97,8 +96,8 @@ void Fila::Inserir(const Dado& d) {
 
 Dado Fila::Remover() {
     Dado DadoRemovido;
-    DadoRemovido = mPrimeiro->mDado;
     Noh* aux = new Noh;
+    DadoRemovido = mPrimeiro->mDado;
     aux = mPrimeiro;
     mPrimeiro = mPrimeiro->mPtProx;
     

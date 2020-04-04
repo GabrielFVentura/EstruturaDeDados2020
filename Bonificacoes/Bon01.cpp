@@ -59,9 +59,9 @@ class Evento{
                 cout << atividadesOfertadas[i] << " ";
         }
 
-        void CadastrarAtividade(string nomeAtividade) // 
+        void CadastrarAtividade(Atividade ativ) // 
         {
-            atividadesOfertadas[atividadesCadastradas] = nomeAtividade;    
+            atividadesOfertadas[atividadesCadastradas] = ativ.nomeAtividade;    
             atividadesCadastradas++;
         }
 };
@@ -94,7 +94,7 @@ class Atividade{
             DataRealizacaoAtividade = DataRealizacao,
             modalidadeAtividade = modalidade;
             
-            event->CadastrarAtividade(nomeAtividade);
+            event->CadastrarAtividade(Atividade ativ);
         };
 
 		void PrintDadosAtividade()

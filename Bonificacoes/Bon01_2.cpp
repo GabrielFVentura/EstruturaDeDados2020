@@ -108,9 +108,9 @@ void Evento::PrintDadosEvento()
     cout << dataInicioEvento << endl;
     cout << dataTerminoEvento << endl;
 }
-void Evento::CadastrarAtividade(string nomeAtividade)
+void Evento::CadastrarAtividade(Atividade ativ)
 {
-    atividadesOfertadas[atividadesCadastradas] = nomeAtividade;
+    atividadesOfertadas[atividadesCadastradas] = ativ.nomeAtividade;
     atividadesCadastradas++;
 }
 
