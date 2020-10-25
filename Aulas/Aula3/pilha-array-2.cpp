@@ -1,13 +1,16 @@
 #include <iostream>
 using namespace std;
 
+typedef int Dado;
+unsigned int MAX = 25;
+
 class Pilha{
     private:
         int _capacidade;
-        int _pilha[25];
+        int _pilha[MAX];
         int _tamanho;
-        int _primeiroValor;
-        int _ultimoValor;
+        Dado _primeiroValor;
+        Dado _ultimoValor;
     public:
         Pilha(int cap){
             _tamanho = 0;
