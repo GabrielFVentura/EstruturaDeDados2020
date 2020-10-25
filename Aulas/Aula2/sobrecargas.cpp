@@ -43,7 +43,7 @@ class Ponto {
         return Ponto(x + ponto.x, y + ponto.y);
     }
 
-    friend ostream& operator <<(ostream& os, Ponto &pt){
+    friend ostream &operator <<(ostream& os, Ponto &pt){
         os << "X " << pt.x << " " << "Y " << pt.y;
         return os;
     }
