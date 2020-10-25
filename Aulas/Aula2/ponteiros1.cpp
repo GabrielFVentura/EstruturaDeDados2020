@@ -21,12 +21,20 @@ int main(){
     cout << "Valor da funcao refStr: " << refStr(ptrSt) << endl;
     cout << "Valor da funcao ptrStr: " << ptrStr(st) << endl;
     cout << "Valor da funcao derefPtr: " << derefPtr(st) << endl;
+    cout << endl;
 
     cout << "Valor da Variavel: " << st << endl;
-    cout << "Valor da Memoria: " << &st << endl;
+    cout << "Valor da Memoria da Variavel: " << &st << endl;
+    cout << endl;
+
     cout << "Valor do Ponteiro: " << ptrSt << endl;
-    cout << "Valor do Ponteiro Dereferenciado: " << *ptrSt << endl;
-    cout << "Valor do Ponteiro do Ponteiro: " << ptrPtrSt << endl;    
-    cout << "Valor do Ponteiro do Ponteiro Dereferenciado: " << **ptrPtrSt << endl;
+    cout << "Valor Armazenado do Ponteiro: " << *ptrSt << endl;
+    cout << "Valor da Memoria do Ponteiro: " << &ptrSt << endl;
+    cout << endl;
+
+    cout << "Valor da Memoria do Ponteiro de Ponteiro: " << &ptrPtrSt << endl;
+    cout << "Valor do Ponteiro de Ponteiro: " << ptrPtrSt << endl;    
+    cout << "Valor Armazenado do Ponteiro do Ponteiro: " << *ptrPtrSt << endl;
+    cout << "Valor Armazenado do Ponteiro do Ponteiro Dereferenciado: " << **ptrPtrSt << endl;
     
 }

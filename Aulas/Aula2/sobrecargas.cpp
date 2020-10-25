@@ -39,7 +39,7 @@ class Ponto {
         return y;
     }
 
-    Ponto operator+ (const Ponto &ponto){
+    Ponto operator+ (Ponto &ponto){
         return Ponto(x + ponto.x, y + ponto.y);
     }
 
