@@ -52,7 +52,7 @@ class Pilha{
     private:
         Noh* topoNoh;
         unsigned int tamanhoPilha;
-        LimparPilha()
+        void LimparPilha()
         {
             while(topoNoh != NULL)
             {
