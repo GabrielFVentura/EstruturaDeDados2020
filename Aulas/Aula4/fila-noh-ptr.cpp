@@ -1,4 +1,6 @@
 #include <iostream>
+#include <cstdlib>
+#include <cstring>
 using namespace std;
 
 class Noh{
@@ -21,9 +23,15 @@ class Fila{
         Noh* ultimoNoh;
         Noh* primeiroNoh;
         Fila(){
+            cout << "Construtor Chamado" << endl;
             _tamanho = 0;
             ultimoNoh = NULL;
             primeiroNoh = NULL;
+        }
+        ~Fila(){
+            cout << "Destrutor Chamado" << endl;
+            delete ultimoNoh;
+            delete primeiroNoh;
         }
         void incrementaTamanho(){
             _tamanho++;
@@ -57,25 +65,29 @@ class Fila{
 
         void desenfileirarNoh(){
             if (getTamanho() > 0) {
+                Noh *nohRemovido = primeiroNoh;
                 if (getTamanho() == 1) { 
-                    Noh *nohRemovido = primeiroNoh;
-                    primeiroNoh = ultimoNoh = NULL;
                     cout << "TAMANHO: " << getTamanho() << endl;
                     cout << "VALOR REMOVIDO: " << nohRemovido->getValor() << endl;
+                    primeiroNoh = NULL;
+                    ultimoNoh = NULL;
                     decrementaTamanho();
-                    delete nohRemovido;
                 } else {
-                    Noh *nohRemovido = primeiroNoh;
                     primeiroNoh = primeiroNoh->nohProximo;
                     cout << "TAMANHO: " << getTamanho() << endl;
                     cout << "VALOR REMOVIDO: " << nohRemovido->getValor() << endl;
                     decrementaTamanho();
-                    delete nohRemovido;
                 }
+                delete nohRemovido;
+
                 cout << endl;
             } else {
                 cout << "PILHA VAZIA" << endl;
             }
+        }
+
+        Fila* getFila(){
+            return this;
         }
 
         void infoValoresNoh(){
@@ -83,13 +95,21 @@ class Fila{
             cout << "VALOR NO ULTIMO NO: " << ultimoNoh->getValor() << endl;
             cout << endl;
         }
+        void esvaziarFila(){
+            while(ultimoNoh != NULL)
+                desenfileirarNoh();
+            desenfileirarNoh();
+        }
+        friend ostream& operator<<(ostream& os, Fila &fila){
+            os << "Primeiro Valor : " << fila.getPrimeiroNohValor() << " " << "Ultimo Valor : " << fila.getUltimoNohValor() << endl;
+        }
 };
 
 int main(){
     Fila fila;
     fila.enfileirarNoh(5);
     fila.infoValoresNoh();
-
+    
     fila.enfileirarNoh(15);
     fila.infoValoresNoh();
     
@@ -107,6 +127,13 @@ int main(){
 
     fila.enfileirarNoh(100);
     fila.enfileirarNoh(125);
+    fila.esvaziarFila();
 
+    Noh* no1 = new Noh(5);
+    Noh* no2 = new Noh(10);
+
+    memcpy(no2,no1,sizeof(Noh*));
+    cout << no2->getValor() << endl;
+    cout << fila << endl;
     return 0;
-}
+}   
