@@ -98,7 +98,7 @@ class Animal{
 class Benfeitor{
     private:
         string _nomeBenfeitor;
-        int _tipoPessoa;
+        bool _tipoPessoaJuridica;
         int _qtdDoacao;
         int _valorDoacao[50];
         int _valorTotalDoacaoBenfeitor;
@@ -108,7 +108,8 @@ class Benfeitor{
             _nomeBenfeitor = n;
             _qtdDoacao = 0;
         }
-        Benfeitor(string n, int v){
+        Benfeitor(string n, int v, bool pj = false){
+            _tipoPessoaJuridica = pj;
             _nomeBenfeitor = n;
             _valorDoacao[0] = v;
             _valorTotalDoacaoBenfeitor += v;
@@ -225,6 +226,7 @@ class ONG{
             os << endl;
             os << "VALOR TOTAL ARRECADADO: " << ONG._valorTotalDoado << endl;
         }
+
         void procurarValoresPorBenfeitores(int v){
             for (int i = 0; i < getNumeroBenfeitores(); i++){
                 if (_benfeitores[i]->procurarValorDoacaoBenfeitor(v)){
@@ -233,6 +235,32 @@ class ONG{
             }
             cout << endl;
         }
+
+        void adicionarDoacaoPorBenfeitor(string nomeBenfeitor, int valorDoacao){
+            for (int i = 0;i < getNumeroBenfeitores();i++){
+                if (_benfeitores[i]->getNomeBenfeitor() == nomeBenfeitor){
+                    _benfeitores[i]->adicionarDoacao(valorDoacao, this);
+                }
+            }
+        }
+
+        void procurarDoacaoPorBenfeitorInput(){
+            int valorDoacao;
+            cout << "VALOR DOACAO A SER PROCURADO: " << endl;
+            cin >> valorDoacao;
+            procurarValoresPorBenfeitores(valorDoacao);
+        }
+
+        void adicionarDoacaoPorBenfeitorInput(){
+            string nomeBenfeitor;
+            int valorDoacao;
+            cout << "NOME DO BENFEITOR REALIZADOR DA DOACAO: " << endl;
+            cin >> nomeBenfeitor;
+            cout << "VALOR DA DOACAO: " << endl;
+            cin >> valorDoacao;
+            adicionarDoacaoPorBenfeitor(nomeBenfeitor,valorDoacao);
+        }
+
         void cadastrarAnimalInput(){
             string nome;
             string especie;
@@ -256,6 +284,35 @@ class ONG{
             
             cadastrarAnimalResgatado(nome,especie,local,DateTime(d,m,a,_m));
         }
+        void cadastrarBenfeitorInput(){
+                string nomeBenfeitor;
+                int doacaoInicial;
+                string temDoacaoInicial;
+                cout << "NOME DO BENFEITOR" << endl;
+                cin >> nomeBenfeitor;
+                cout << "TEM DOACOA INICIAL? " << endl;
+                cin >> temDoacaoInicial;
+                if (temDoacaoInicial == "Sim" || temDoacaoInicial == "sim"){
+                    cout << "VALOR DA DOACAO INICIAL: " << endl;
+                    cin >> doacaoInicial;
+                    cadastrarBenfeitor(nomeBenfeitor,doacaoInicial);
+                } else {
+                    cadastrarBenfeitor(nomeBenfeitor);
+                }
+        }
+        
+        void procurarAnimalPorEspecieInput(){
+            string especie;
+            cout << "ESPECIE A SER PROCURADO " << endl;
+            cin >> especie;
+            procurarAnimalPorEspecie(especie);
+        }
+
+        void procurarBenfeitorPorValorInput(){
+            int valor;
+            cout << "VALOR A SER PROCURADO NOS BENFEITORES " << endl;
+            cin >> valor;         
+        }
 };
 
 void Benfeitor::adicionarDoacao(int v, ONG* ong){
@@ -268,12 +325,15 @@ void Benfeitor::adicionarDoacao(int v, ONG* ong){
 // date._dia <<"/" << date._mes <<"/" << date._ano << endl;
 int main(){
     DateTime date("27","3","2020",3);
+    char command;
     
     ONG ong;
 
     ong.cadastrarBenfeitor("Joao");
     ong.cadastrarBenfeitor("Amanda", 50);
     ong.cadastrarBenfeitor("Gabriel", 250);
+    ong.cadastrarBenfeitor("Gabriel", 250);
+    ong.adicionarDoacaoPorBenfeitor("Gabriel",1000);
     
     ong._benfeitores[0]->adicionarDoacao(1000, &ong);
     ong._benfeitores[1]->adicionarDoacao(100, &ong);
@@ -283,16 +343,67 @@ int main(){
     ong.cadastrarAnimalResgatado("Kiko","Canino","Estrada dos Bandeirantes", DateTime("10","2","2016",2));
     ong.cadastrarAnimalResgatado("Mike","Canino","Rua da UFLA", DateTime("15","10","2012",10));
 
-
     cout << ong._benfeitores[0]->resultadoProcurarValorDoacaoPorBenfeitor(55) << endl;
 
     ong.procurarValoresPorBenfeitores(50);
-
     ong.procurarAnimalPorEspecie("Canino");
 
-    ong.cadastrarAnimalInput();   
-
     cout << ong << endl;
+    do {
+        cout << "Opcoes: " << endl;
+        cout << "b -> Cadastrar Benfeitor" << endl;
+        cout << "c -> Cadastrar Animal Resgatado" << endl;
+        cout << "d -> Realizar Doacao por Nome Benfeitor" << endl;
+        cout << "p -> Procurar Doacao em Benfeitores" << endl;
+        cout << "e -> Procurar Animais por Especie" << endl;
+        cout << "v -> Visualizar Registros" << endl;
+        cout << "j -> Procurar Empresas Benfeitoras" << endl;
+        cout << "f -> Finalizar Secao" << endl;
+        cin >> command;
+        switch(command){
+            case 'b':{
+                ong.cadastrarBenfeitorInput();
+                break;
+            }
+            case 'c':{
+                ong.cadastrarAnimalInput();
+                break;
+            }
+            case 'd':{
+                ong.adicionarDoacaoPorBenfeitorInput();
+                break;
+            }
+            case 'p':{
+                ong.procurarBenfeitorPorValorInput();
+                break;
+            }
+            case 'e':{
+                ong.procurarAnimalPorEspecieInput();
+                break;
+            }
+            case 'v':{
+                cout << ong << endl;
+                break;
+            }
+            case 'j':{
+                cout << ong << endl;
+                break;
+            }
+            case 'f':{
+                break;
+            }
+            // case 'b':{
+            //     break;
+            // }
+            // case 'b':{
+            //     break;
+            // }
+            default:{
+                cerr << "Comando invalido" << endl;
+            }
+        }
 
+    } while (command != 'f');
+    
     return 0;
 }
