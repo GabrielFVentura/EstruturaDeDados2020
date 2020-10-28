@@ -47,6 +47,17 @@ class DateTime{
     friend ostream& operator<<(ostream& os, DateTime &date){
         os << date._dia <<"/" << date._mes <<"/" << date._ano << endl;
     }
+
+    void criarInputDateTime(){
+        string d;
+        string m;
+        string a;
+        int MM;
+        cin >> d >> m >> a >> MM;
+        _dia = d;
+        _mes = m;
+        _ano = a;
+    }
 };
 
 class Animal{
@@ -222,6 +233,29 @@ class ONG{
             }
             cout << endl;
         }
+        void cadastrarAnimalInput(){
+            string nome;
+            string especie;
+            string local;
+            DateTime data;
+            string d,m,a;
+            int _m;
+            cout << "NOME DO ANIMAL RESGATADO: " << endl;
+            cin >> nome;
+            cout << "ESPECIE DO ANIMAL RESGATADO :" << endl;
+            cin >> especie;
+            cout << "LOCAL DO RESGATE: " << endl;
+            cin >> local;
+            cout << "DATA DO RESGATE (DD/MM/AAAA): " << endl;
+            cout << "DIA: ";
+            cin >> d;
+            cout << "MES: ";
+            cin >> m;
+            cout << "ANO: ";
+            cin >> a;
+            
+            cadastrarAnimalResgatado(nome,especie,local,DateTime(d,m,a,_m));
+        }
 };
 
 void Benfeitor::adicionarDoacao(int v, ONG* ong){
@@ -234,7 +268,7 @@ void Benfeitor::adicionarDoacao(int v, ONG* ong){
 // date._dia <<"/" << date._mes <<"/" << date._ano << endl;
 int main(){
     DateTime date("27","3","2020",3);
-
+    
     ONG ong;
 
     ong.cadastrarBenfeitor("Joao");
@@ -249,13 +283,16 @@ int main(){
     ong.cadastrarAnimalResgatado("Kiko","Canino","Estrada dos Bandeirantes", DateTime("10","2","2016",2));
     ong.cadastrarAnimalResgatado("Mike","Canino","Rua da UFLA", DateTime("15","10","2012",10));
 
-    cout << ong << endl;
 
     cout << ong._benfeitores[0]->resultadoProcurarValorDoacaoPorBenfeitor(55) << endl;
 
     ong.procurarValoresPorBenfeitores(50);
 
     ong.procurarAnimalPorEspecie("Canino");
+
+    ong.cadastrarAnimalInput();   
+
+    cout << ong << endl;
 
     return 0;
 }
