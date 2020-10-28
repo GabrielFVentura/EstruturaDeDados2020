@@ -131,6 +131,10 @@ class Benfeitor{
             return _nomeBenfeitor;
         }
 
+        bool getTipoPessoaJuridica(){
+            return _tipoPessoaJuridica;
+        }
+
         int getQtdDoacao(){
             return _qtdDoacao;
         }
@@ -183,8 +187,8 @@ class ONG{
             _valorTotalDoado += v;
         }
 
-        void cadastrarBenfeitor(string nome, int v = 0){
-            Benfeitor* benf = new Benfeitor(nome, v);
+        void cadastrarBenfeitor(string nome, int v = 0, bool pj = false){
+            Benfeitor* benf = new Benfeitor(nome, v, pj);
             _benfeitores[_numeroBenfeitores] = benf;
             _numeroBenfeitores++;
             adicionarValorTotalDado(v);
@@ -216,7 +220,7 @@ class ONG{
                       " DATA DO RESGATE: " << ONG._animaisResgatados[i]->getDateTime();
             }
             os << endl;
-            os << "Benfeitores Cadastratados: " << endl;
+            os << "Benfeitores Cadastrados: " << endl;
             for (int i = 0; i < ONG._numeroBenfeitores ; i++){
                 os << "NOME DO BENFEITOR: " << ONG._benfeitores[i]->getNomeBenfeitor() << " ";
                 os << "VALORES DOADOS: ";
@@ -288,16 +292,19 @@ class ONG{
                 string nomeBenfeitor;
                 int doacaoInicial;
                 string temDoacaoInicial;
+                string indicadorPessoaJuridica;
                 cout << "NOME DO BENFEITOR" << endl;
                 cin >> nomeBenfeitor;
+                cout << "PESSOA JURIDICA? " << endl;
+                cin >> indicadorPessoaJuridica;
                 cout << "TEM DOACOA INICIAL? " << endl;
                 cin >> temDoacaoInicial;
                 if (temDoacaoInicial == "Sim" || temDoacaoInicial == "sim"){
                     cout << "VALOR DA DOACAO INICIAL: " << endl;
                     cin >> doacaoInicial;
-                    cadastrarBenfeitor(nomeBenfeitor,doacaoInicial);
+                    cadastrarBenfeitor(nomeBenfeitor,doacaoInicial, indicadorPessoaJuridica == "sim");
                 } else {
-                    cadastrarBenfeitor(nomeBenfeitor);
+                    cadastrarBenfeitor(nomeBenfeitor, 0, indicadorPessoaJuridica == "sim");
                 }
         }
         
@@ -312,6 +319,17 @@ class ONG{
             int valor;
             cout << "VALOR A SER PROCURADO NOS BENFEITORES " << endl;
             cin >> valor;         
+        }
+
+        void procurarEmpresasBenfeitorasInput(){
+             for (int i = 0; i < getNumeroBenfeitores(); i++){
+                if (_benfeitores[i]->getTipoPessoaJuridica()){
+                    cout << "NOME DA EMPRESA BENFEITORA: " << _benfeitores[i]->getNomeBenfeitor() << " " << endl;
+                    cout << "MONTANTE DOADO: " << _benfeitores[i]->getValorTotalDoacao() << " " << endl;
+                    cout << "QUANTIDADES DE VEZES DOADAS: " << _benfeitores[i]->getQtdDoacao() << " " << endl;
+                }
+            }
+            cout << endl;
         }
 };
 
@@ -332,7 +350,7 @@ int main(){
     ong.cadastrarBenfeitor("Joao");
     ong.cadastrarBenfeitor("Amanda", 50);
     ong.cadastrarBenfeitor("Gabriel", 250);
-    ong.cadastrarBenfeitor("Gabriel", 250);
+    ong.cadastrarBenfeitor("Petrobras", 25000, true);
     ong.adicionarDoacaoPorBenfeitor("Gabriel",1000);
     
     ong._benfeitores[0]->adicionarDoacao(1000, &ong);
@@ -381,23 +399,17 @@ int main(){
                 ong.procurarAnimalPorEspecieInput();
                 break;
             }
-            case 'v':{
-                cout << ong << endl;
+            case 'j':{
+                ong.procurarEmpresasBenfeitorasInput();
                 break;
             }
-            case 'j':{
+            case 'v':{
                 cout << ong << endl;
                 break;
             }
             case 'f':{
                 break;
             }
-            // case 'b':{
-            //     break;
-            // }
-            // case 'b':{
-            //     break;
-            // }
             default:{
                 cerr << "Comando invalido" << endl;
             }
