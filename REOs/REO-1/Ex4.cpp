@@ -13,7 +13,10 @@ pequeno programa (main) que as utilize para solucionar o problema apresentado. V
 */
 
 #include <iostream>
+#include <cstring>
+#include<bits/stdc++.h> 
 using namespace std;
+
 class ONG;
 class DateTime{
     private:
@@ -111,7 +114,7 @@ class Benfeitor{
         Benfeitor(string n, int v, bool pj = false){
             _tipoPessoaJuridica = pj;
             _nomeBenfeitor = n;
-            _valorDoacao[0] = v;
+            _valorDoacao[getQtdDoacao()] = v;
             _valorTotalDoacaoBenfeitor += v;
             _qtdDoacao++;
         }
@@ -195,8 +198,10 @@ class ONG{
             _valorTotalDoado += v;
         }
 
-        void cadastrarBenfeitor(string nome, int v = 0, bool pj = false){
-            Benfeitor* benf = new Benfeitor(nome, v, pj);
+        void cadastrarBenfeitor(string nomeBenfeitor, int v = 0, bool pj = false){
+            string verificarDoacao;
+
+            Benfeitor* benf = new Benfeitor(nomeBenfeitor, v, pj);
             _benfeitores[_numeroBenfeitores] = benf;
             _numeroBenfeitores++;
             adicionarValorTotalDado(v);
@@ -210,8 +215,9 @@ class ONG{
 
         void procurarAnimalPorEspecie(string especie){
             for (int i = 0;i < getNumeroAnimais(); i++){
-                if (_animaisResgatados[i]->getEspecie() == especie){
-                    cout << "NOME DO ANIMAL: " << _animaisResgatados[i]->getNomeAnimal() <<
+                if (verificarLowerCaseInput(_animaisResgatados[i]->getEspecie(), especie)){
+                    cout << 
+                      "NOME DO ANIMAL: " << _animaisResgatados[i]->getNomeAnimal() <<
                       " ESPECIE DO ANIMAL: " << _animaisResgatados[i]->getEspecie() << 
                       " LOCAL DO RESGATE: " << _animaisResgatados[i]->getLocalResgate() << 
                       " DATA DO RESGATE: " << _animaisResgatados[i]->getDateTime(); 
@@ -231,9 +237,9 @@ class ONG{
             os << "Benfeitores Cadastrados: " << endl;
             for (int i = 0; i < ONG._numeroBenfeitores ; i++){
                 os << "NOME DO BENFEITOR: " << ONG._benfeitores[i]->getNomeBenfeitor() << " ";
-                os << "VALORES DOADOS: ";
+                os << "VALORES DOADOS: R$";
                 ONG._benfeitores[i]->getValoresDoacao();
-                os << " VALOR TOTAL: " << ONG._benfeitores[i]->getValorTotalDoacao() << " " << endl;
+                os << " VALOR TOTAL: R$" << ONG._benfeitores[i]->getValorTotalDoacao() << " " << endl;
             }
             os << endl;
             os << "VALOR TOTAL ARRECADADO: " << ONG._valorTotalDoado << endl;
@@ -249,8 +255,8 @@ class ONG{
         }
 
         void adicionarDoacaoPorBenfeitor(string nomeBenfeitor, int valorDoacao){
-            for (int i = 0;i < getNumeroBenfeitores();i++){
-                if (_benfeitores[i]->getNomeBenfeitor() == nomeBenfeitor){
+            for (int i = 0; i < getNumeroBenfeitores(); i++){
+                if (verificarLowerCaseInput(_benfeitores[i]->getNomeBenfeitor(), nomeBenfeitor)){
                     _benfeitores[i]->adicionarDoacao(valorDoacao, this);
                 }
             }
@@ -258,7 +264,7 @@ class ONG{
 
         void procurarDoacaoPorBenfeitorInput(){
             int valorDoacao;
-            cout << "VALOR DOACAO A SER PROCURADO: " << endl;
+            cout << "VALOR DOACAO A SER PROCURADO: R$" << endl;
             cin >> valorDoacao;
             procurarValoresPorBenfeitores(valorDoacao);
         }
@@ -266,9 +272,9 @@ class ONG{
         void cadastrarDoacaoPorBenfeitorInput(){
             string nomeBenfeitor;
             int valorDoacao;
-            cout << "NOME DO BENFEITOR REALIZADOR DA DOACAO: " << endl;
+            cout << "NOME DO BENFEITOR REALIZADOR DA DOACAO: R$" << endl;
             cin >> nomeBenfeitor;
-            cout << "VALOR DA DOACAO: " << endl;
+            cout << "VALOR DA DOACAO: R$" << endl;
             cin >> valorDoacao;
             adicionarDoacaoPorBenfeitor(nomeBenfeitor,valorDoacao);
         }
@@ -294,27 +300,44 @@ class ONG{
             cout << "ANO: ";
             cin >> a;
             
-            cadastrarAnimalResgatado(nome,especie,local,DateTime(d,m,a,_m));
+            cadastrarAnimalResgatado(nome, especie, local, DateTime(d,m,a,_m));
         }
         void cadastrarBenfeitorInput(){
                 string nomeBenfeitor;
-                int doacaoInicial;
+                int valorDoacao;
                 string temDoacaoInicial;
                 string indicadorPessoaJuridica;
+                bool nomeRepetido = false;
+            
                 cout << "NOME DO BENFEITOR" << endl;
                 cin >> nomeBenfeitor;
-                cout << "PESSOA JURIDICA? " << endl;
-                cin >> indicadorPessoaJuridica;
-                cout << "TEM DOACOA INICIAL? " << endl;
-                cin >> temDoacaoInicial;
-                if (temDoacaoInicial == "Sim" || temDoacaoInicial == "sim"){
-                    cout << "VALOR DA DOACAO INICIAL: " << endl;
-                    cin >> doacaoInicial;
-                    cadastrarBenfeitor(nomeBenfeitor,doacaoInicial, indicadorPessoaJuridica == "sim");
-                } else {
-                    cadastrarBenfeitor(nomeBenfeitor, 0, indicadorPessoaJuridica == "sim");
+                    
+                for (int i = 0; i < getNumeroBenfeitores(); i++){
+                    if (verificarLowerCaseInput(_benfeitores[i]->getNomeBenfeitor(), nomeBenfeitor)){
+                        nomeRepetido = true;
+                    }
                 }
-        }
+
+                if (!nomeRepetido){
+                    cout << "PESSOA JURIDICA? (sim ou nao)" << endl;
+                    cin >> indicadorPessoaJuridica;
+
+                    cout << "VALOR DA DOACAO INICIAL: R$" << endl;
+                    cin >> valorDoacao;
+
+                    cadastrarBenfeitor(nomeBenfeitor, valorDoacao, verificarLowerCaseInput(indicadorPessoaJuridica,"sim"));
+                } else {
+                    string verificarDoacao;
+                    cout << "NOME JA CADASTRADO, DESEJA FAZER UMA DOACAO COM ESSE USUARIO? (sim ou nao)" << endl;
+                    cin >> verificarDoacao;
+                    if (verificarLowerCaseInput(verificarDoacao, "sim")){
+                        cout << "VALOR DA DOACAO? " << endl;
+                        cin >> valorDoacao;
+                        adicionarDoacaoPorBenfeitor(nomeBenfeitor, valorDoacao);
+                    }
+                    cout << "VALOR DE: R$ " << valorDoacao << " REGISTRADO PARA: " << nomeBenfeitor << endl;
+                }
+            }
         
         void procurarAnimalPorEspecieInput(){
             string especie;
@@ -323,18 +346,13 @@ class ONG{
             procurarAnimalPorEspecie(especie);
         }
 
-        void procurarBenfeitorPorValorInput(){
-            int valor;
-            cout << "VALOR A SER PROCURADO NOS BENFEITORES " << endl;
-            cin >> valor;         
-        }
-
         void procurarEmpresasBenfeitorasInput(){
              for (int i = 0; i < getNumeroBenfeitores(); i++){
                 if (_benfeitores[i]->getTipoPessoaJuridica()){
                     cout << "NOME DA EMPRESA BENFEITORA: " << _benfeitores[i]->getNomeBenfeitor() << " " << endl;
-                    cout << "MONTANTE DOADO: " << _benfeitores[i]->getValorTotalDoacao() << " " << endl;
+                    cout << "MONTANTE DOADO: R$" << _benfeitores[i]->getValorTotalDoacao() << " " << endl;
                     cout << "QUANTIDADES DE VEZES DOADAS: " << _benfeitores[i]->getQtdDoacao() << " " << endl;
+                    cout << endl;
                 }
             }
             cout << endl;
@@ -357,6 +375,26 @@ class ONG{
                     cout << endl;
             }
         }
+        
+        void printOpcoes(){
+            cout << "Opcoes: " << endl;
+            cout << "c -> Cadastrar Animal Resgatado" << endl;
+            cout << "e -> Procurar Animais por Especie" << endl;
+            cout << "a -> Listar Animais Resgatados" << endl;
+            cout << "b -> Cadastrar Benfeitor" << endl;
+            cout << "d -> Realizar Doacao por Nome Benfeitor" << endl;
+            cout << "p -> Procurar Doacao em Benfeitores" << endl;
+            cout << "l -> Listar Benfeitores Cadastrados" << endl;
+            cout << "j -> Procurar Empresas Benfeitoras" << endl;
+            cout << "v -> Visualizar Registros" << endl;
+            cout << "f -> Finalizar Secao" << endl;
+        }
+
+        bool verificarLowerCaseInput(string str, string vStr){
+            transform(str.begin(), str.end(), str.begin(), ::tolower); 
+            transform(vStr.begin(), vStr.end(), vStr.begin(), ::tolower); 
+            return (str == vStr);
+        }
 };
 
 void Benfeitor::adicionarDoacao(int v, ONG* ong){
@@ -368,11 +406,8 @@ void Benfeitor::adicionarDoacao(int v, ONG* ong){
 
 // date._dia <<"/" << date._mes <<"/" << date._ano << endl;
 int main(){
-    DateTime date("27","3","2020",3);
     char command;
-    
     ONG ong;
-
     ong.cadastrarBenfeitor("Joao");
     ong.cadastrarBenfeitor("Amanda", 50);
     ong.cadastrarBenfeitor("Gabriel", 250);
@@ -387,64 +422,54 @@ int main(){
     ong.cadastrarAnimalResgatado("Kiko","Canino","Estrada dos Bandeirantes", DateTime("10","2","2016",2));
     ong.cadastrarAnimalResgatado("Mike","Canino","Rua da UFLA", DateTime("15","10","2012",10));
     
-    do {
-        cout << "Opcoes: " << endl;
-        cout << "c -> Cadastrar Animal Resgatado" << endl;
-        cout << "e -> Procurar Animais por Especie" << endl;
-        cout << "a -> Listar Animais Resgatados" << endl;
-        cout << "b -> Cadastrar Benfeitor" << endl;
-        cout << "d -> Realizar Doacao por Nome Benfeitor" << endl;
-        cout << "p -> Procurar Doacao em Benfeitores" << endl;
-        cout << "l -> Listar Benfeitores Cadastrados" << endl;
-        cout << "j -> Procurar Empresas Benfeitoras" << endl;
-        cout << "v -> Visualizar Registros" << endl;
-        cout << "f -> Finalizar Secao" << endl;
-        cin >> command;
-        switch(command){
-            case 'c':{
-                ong.cadastrarAnimalInput();
-                break;
-            }
-            case 'e':{
-                ong.procurarAnimalPorEspecieInput();
-                break;
-            }
-            case 'a':{
-                ong.listarAnimaisCadastrados();
-                break;
-            }
-            case 'b':{
-                ong.cadastrarBenfeitorInput();
-                break;
-            }
-            case 'd':{
-                ong.cadastrarDoacaoPorBenfeitorInput();
-                break;
-            }
-            case 'p':{
-                ong.procurarBenfeitorPorValorInput();
-                break;
-            }
-            case 'j':{
-                ong.procurarEmpresasBenfeitorasInput();
-                break;
-            }
-            case 'l':{
-                ong.listarBenfeitoresCadastrados();
-                break;
-            }
-            case 'v':{
-                cout << ong << endl;
-                break;
-            }
-            case 'f':{
-                break;
-            }
-            default:{
-                cerr << "Comando invalido" << endl;
-            }
-        }
-    } while (command != 'f');
+     do {
+         ong.printOpcoes();
+         cin >> command;
+         switch(command){
+             case 'c':{
+                 ong.cadastrarAnimalInput();
+                 break;
+             }
+             case 'e':{
+                 ong.procurarAnimalPorEspecieInput();
+                 break;
+             }
+             case 'a':{
+                 ong.listarAnimaisCadastrados();
+                 break;
+             }
+             case 'b':{
+                 ong.cadastrarBenfeitorInput();
+                 break;
+             }
+             case 'd':{
+                 ong.cadastrarDoacaoPorBenfeitorInput();
+                 break;
+             }
+             case 'p':{
+                 ong.procurarDoacaoPorBenfeitorInput();
+                 break;
+             }
+             case 'j':{
+                 ong.procurarEmpresasBenfeitorasInput();
+                 break;
+             }
+             case 'l':{
+                 ong.listarBenfeitoresCadastrados();
+                 break;
+             }
+             case 'v':{
+                 cout << ong << endl;
+                 break;
+             }
+             case 'f':{
+                 break;
+             }
+             default:{
+                 cerr << "Comando invalido" << endl;
+             }
+         }
+     } while (command != 'f');
     
     return 0;
 }
