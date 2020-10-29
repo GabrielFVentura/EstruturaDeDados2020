@@ -114,9 +114,11 @@ class Benfeitor{
         Benfeitor(string n, int v, bool pj = false){
             _tipoPessoaJuridica = pj;
             _nomeBenfeitor = n;
-            _valorDoacao[getQtdDoacao()] = v;
-            _valorTotalDoacaoBenfeitor += v;
-            _qtdDoacao++;
+            if (v != 0){
+                _valorDoacao[getQtdDoacao()] = v;
+                _valorTotalDoacaoBenfeitor += v;
+                _qtdDoacao++;
+            }
         }
         Benfeitor(){}
 
@@ -148,7 +150,7 @@ class Benfeitor{
 
         void getValoresDoacao(){
             for (int i = 0; i < getQtdDoacao(); i++){
-                cout << _valorDoacao[i] << " ";
+                cout << "R$" << _valorDoacao[i] << " ";
             }
         }
 
@@ -237,7 +239,7 @@ class ONG{
             os << "Benfeitores Cadastrados: " << endl;
             for (int i = 0; i < ONG._numeroBenfeitores ; i++){
                 os << "NOME DO BENFEITOR: " << ONG._benfeitores[i]->getNomeBenfeitor() << " ";
-                os << "VALORES DOADOS: R$";
+                os << "VALORES DOADOS: ";
                 ONG._benfeitores[i]->getValoresDoacao();
                 os << " VALOR TOTAL: R$" << ONG._benfeitores[i]->getValorTotalDoacao() << " " << endl;
             }
@@ -246,10 +248,15 @@ class ONG{
         }
 
         void procurarValoresPorBenfeitores(int v){
+            bool valorExiste = false;
             for (int i = 0; i < getNumeroBenfeitores(); i++){
                 if (_benfeitores[i]->procurarValorDoacaoBenfeitor(v)){
                     cout << "VALOR ENCONTRADO PARA O BENFEITOR: " << _benfeitores[i]->getNomeBenfeitor() << endl;
+                    valorExiste = true;
                 }
+            }
+            if (!valorExiste){
+                cout << "VALOR NAO ENCONTRADO PARA NENHUM BENFEITOR " << endl;
             }
             cout << endl;
         }
@@ -264,19 +271,30 @@ class ONG{
 
         void procurarDoacaoPorBenfeitorInput(){
             int valorDoacao;
-            cout << "VALOR DOACAO A SER PROCURADO: R$" << endl;
+            cout << "VALOR DA DOACAO A SER PROCURADO: " << endl;
             cin >> valorDoacao;
             procurarValoresPorBenfeitores(valorDoacao);
         }
 
         void cadastrarDoacaoPorBenfeitorInput(){
             string nomeBenfeitor;
+            bool benfeitorExiste = false;
             int valorDoacao;
-            cout << "NOME DO BENFEITOR REALIZADOR DA DOACAO: R$" << endl;
+            cout << "NOME DO BENFEITOR REALIZADOR DA DOACAO: " << endl;
             cin >> nomeBenfeitor;
-            cout << "VALOR DA DOACAO: R$" << endl;
-            cin >> valorDoacao;
-            adicionarDoacaoPorBenfeitor(nomeBenfeitor,valorDoacao);
+            for (int i = 0; i < getNumeroBenfeitores(); i++){
+                if (verificarLowerCaseInput(_benfeitores[i]->getNomeBenfeitor(), nomeBenfeitor)){
+                    benfeitorExiste = true;
+                }
+            }
+            if (benfeitorExiste){
+                cout << "VALOR DA DOACAO: " << endl;
+                cin >> valorDoacao;
+            } else {
+                cout << "BENFEITOR NAO ENCONTRADO" << endl;
+            }
+
+            adicionarDoacaoPorBenfeitor(nomeBenfeitor, valorDoacao);
         }
 
         void cadastrarAnimalInput(){
@@ -300,8 +318,9 @@ class ONG{
             cout << "ANO: ";
             cin >> a;
             
-            cadastrarAnimalResgatado(nome, especie, local, DateTime(d,m,a,_m));
+            cadastrarAnimalResgatado(nome, especie, local, DateTime(d, m, a, _m));
         }
+
         void cadastrarBenfeitorInput(){
                 string nomeBenfeitor;
                 int valorDoacao;
@@ -351,7 +370,7 @@ class ONG{
                 if (_benfeitores[i]->getTipoPessoaJuridica()){
                     cout << "NOME DA EMPRESA BENFEITORA: " << _benfeitores[i]->getNomeBenfeitor() << " " << endl;
                     cout << "MONTANTE DOADO: R$" << _benfeitores[i]->getValorTotalDoacao() << " " << endl;
-                    cout << "QUANTIDADES DE VEZES DOADAS: " << _benfeitores[i]->getQtdDoacao() << " " << endl;
+                    cout << "QUANTIDADE DE DOACOES: " << _benfeitores[i]->getQtdDoacao() << " " << endl;
                     cout << endl;
                 }
             }
@@ -370,8 +389,8 @@ class ONG{
         void listarBenfeitoresCadastrados(){
             for (int i = 0; i < getNumeroBenfeitores(); i++){
                     cout << "NOME DO BENFEITOR: " << _benfeitores[i]->getNomeBenfeitor() << " " << endl;
-                    cout << "MONTANTE DOADO: " << _benfeitores[i]->getValorTotalDoacao() << " " << endl;
-                    cout << "QUANTIDADES DE VEZES DOADAS: " << _benfeitores[i]->getQtdDoacao() << " " << endl;
+                    cout << "MONTANTE DOADO: R$" << _benfeitores[i]->getValorTotalDoacao() << " " << endl;
+                    cout << "QUANTIDADES DE DOACOES: " << _benfeitores[i]->getQtdDoacao() << " " << endl;
                     cout << endl;
             }
         }
@@ -382,7 +401,7 @@ class ONG{
             cout << "e -> Procurar Animais por Especie" << endl;
             cout << "a -> Listar Animais Resgatados" << endl;
             cout << "b -> Cadastrar Benfeitor" << endl;
-            cout << "d -> Realizar Doacao por Nome Benfeitor" << endl;
+            cout << "d -> Realizar Doacao pelo Nome do Benfeitor" << endl;
             cout << "p -> Procurar Doacao em Benfeitores" << endl;
             cout << "l -> Listar Benfeitores Cadastrados" << endl;
             cout << "j -> Procurar Empresas Benfeitoras" << endl;
