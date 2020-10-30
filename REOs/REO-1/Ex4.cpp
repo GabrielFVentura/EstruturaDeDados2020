@@ -390,7 +390,7 @@ class ONG{
             for (int i = 0; i < getNumeroBenfeitores(); i++){
                     cout << "NOME DO BENFEITOR: " << _benfeitores[i]->getNomeBenfeitor() << " " << endl;
                     cout << "MONTANTE DOADO: R$" << _benfeitores[i]->getValorTotalDoacao() << " " << endl;
-                    cout << "QUANTIDADES DE DOACOES: " << _benfeitores[i]->getQtdDoacao() << " " << endl;
+                    cout << "QUANTIDADE DE DOACOES: " << _benfeitores[i]->getQtdDoacao() << " " << endl;
                     cout << endl;
             }
         }
