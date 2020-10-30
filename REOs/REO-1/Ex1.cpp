@@ -101,16 +101,21 @@ class Associacao{
             _motoqueirosCadastrados[getNumeroMotoqueirosCadastrados()] = *motoqueiro;
             incrementarNumeroMotoqueirosCadastrados();
         };
-        void cadastrarOficinaLoja();
-        void cadastrarAcordoParceria();
-        void procurarMarcaPorOficinaLoja();
+        void cadastrarOficinaLoja(){
+
+        };
+        void registrarAcordoParceria(){};
+        void procurarMarcaPorOficinaLoja(){};
+        void consultarOficinaLojasPorMarca(){};
+        void printOpcoes(){
+            cout << "Opcoes: " << endl;
+            cout << "c -> Cadastrar Motoqueiro" << endl;
+            cout << "a -> Cadastrar Oficina/Loja" << endl;
+            cout << "d -> Registrar Acordo/Parceria" << endl;
+            cout << "e -> Consultar Oficinas/Lojas por Marcas" << endl;
+        }
 
 };
-
-
-
-
-
 
 int main(){
     char command;
@@ -121,21 +126,29 @@ int main(){
     cout << motoqueiro;
 
     do {
+        associacao.printOpcoes();
+        cin >> command;
         switch (command)
         {
         case('c'):{
+            associacao.cadastrarMotoqueiro();
             break;
         }
-        case('l'):{
+        case('a'):{
+            associacao.cadastrarOficinaLoja();
+            break;
+        }
+        case('d'):{
+            associacao.registrarAcordoParceria();
             break;
         }
         case('e'):{
+            associacao.consultarOficinaLojasPorMarca();
             break;
         }
         case('f'):{
             break;
         }
-        
         default:
             break;
         }
