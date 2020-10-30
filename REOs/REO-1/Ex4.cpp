@@ -33,15 +33,15 @@ class DateTime{
         _mes = MM < 10 ? "0"+ m: m;
         _ano = a;
     }
+    DateTime(string d, string m, string a){
+        _dia = d;
+        _mes = m;
+        _ano = a;
+    }
     DateTime(){
         _dia = "00";
         _mes = "00";
         _ano = "0000";
-    }
-    string setDateTime(string d, string m, string a, int MM){
-        _dia = d;
-        _mes = MM < 10 ? "0"+ m: m;
-        _ano = a;
     }
     string getDateTime(){
         return _dia+"/"+_mes+"/"+_ano;
@@ -49,6 +49,7 @@ class DateTime{
 
     friend ostream& operator<<(ostream& os, DateTime &date){
         os << date._dia <<"/" << date._mes <<"/" << date._ano << endl;
+        return os;
     }
 
     void criarInputDateTime(){
@@ -95,6 +96,7 @@ class Animal{
             " Especie: " << anim.getEspecie() << 
             " Local de Resgate: " << anim.getLocalResgate() << 
             " Data do Resgate " << anim.getDateTime();
+            return os;
         }
 };
 
@@ -244,7 +246,8 @@ class ONG{
                 os << " VALOR TOTAL: R$" << ONG._benfeitores[i]->getValorTotalDoacao() << " " << endl;
             }
             os << endl;
-            os << "VALOR TOTAL ARRECADADO: " << ONG._valorTotalDoado << endl;
+            os << "VALOR TOTAL ARRECADADO: R$" << ONG._valorTotalDoado << endl;
+            return os;
         }
 
         void procurarValoresPorBenfeitores(int v){
@@ -303,7 +306,6 @@ class ONG{
             string local;
             DateTime data;
             string d,m,a;
-            int _m;
             cout << "NOME DO ANIMAL RESGATADO: " << endl;
             cin >> nome;
             cout << "ESPECIE DO ANIMAL RESGATADO :" << endl;
@@ -318,7 +320,7 @@ class ONG{
             cout << "ANO: ";
             cin >> a;
             
-            cadastrarAnimalResgatado(nome, especie, local, DateTime(d, m, a, _m));
+            cadastrarAnimalResgatado(nome, especie, local, DateTime(d, m, a));
         }
 
         void cadastrarBenfeitorInput(){
@@ -417,8 +419,6 @@ class ONG{
         }
 
         void procurarMaiorEmpresaBenfeitora(){
-            Benfeitor* tempBenf[getNumeroBenfeitores()];
-            int numeroEmpresaBenfeitoras = 0;
             int maiorValor = 0;
             int indiceEmpresa = 0;
 
