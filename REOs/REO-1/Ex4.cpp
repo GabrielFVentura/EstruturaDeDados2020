@@ -33,15 +33,15 @@ class DateTime{
         _mes = MM < 10 ? "0"+ m: m;
         _ano = a;
     }
+    DateTime(string d, string m, string a){
+        _dia = d;
+        _mes = m;
+        _ano = a;
+    }
     DateTime(){
         _dia = "00";
         _mes = "00";
         _ano = "0000";
-    }
-    string setDateTime(string d, string m, string a, int MM){
-        _dia = d;
-        _mes = MM < 10 ? "0"+ m: m;
-        _ano = a;
     }
     string getDateTime(){
         return _dia+"/"+_mes+"/"+_ano;
@@ -49,6 +49,7 @@ class DateTime{
 
     friend ostream& operator<<(ostream& os, DateTime &date){
         os << date._dia <<"/" << date._mes <<"/" << date._ano << endl;
+        return os;
     }
 
     void criarInputDateTime(){
@@ -95,6 +96,7 @@ class Animal{
             " Especie: " << anim.getEspecie() << 
             " Local de Resgate: " << anim.getLocalResgate() << 
             " Data do Resgate " << anim.getDateTime();
+            return os;
         }
 };
 
@@ -244,7 +246,8 @@ class ONG{
                 os << " VALOR TOTAL: R$" << ONG._benfeitores[i]->getValorTotalDoacao() << " " << endl;
             }
             os << endl;
-            os << "VALOR TOTAL ARRECADADO: " << ONG._valorTotalDoado << endl;
+            os << "VALOR TOTAL ARRECADADO: R$" << ONG._valorTotalDoado << endl;
+            return os;
         }
 
         void procurarValoresPorBenfeitores(int v){
@@ -303,7 +306,6 @@ class ONG{
             string local;
             DateTime data;
             string d,m,a;
-            int _m;
             cout << "NOME DO ANIMAL RESGATADO: " << endl;
             cin >> nome;
             cout << "ESPECIE DO ANIMAL RESGATADO :" << endl;
@@ -318,7 +320,7 @@ class ONG{
             cout << "ANO: ";
             cin >> a;
             
-            cadastrarAnimalResgatado(nome, especie, local, DateTime(d, m, a, _m));
+            cadastrarAnimalResgatado(nome, especie, local, DateTime(d, m, a));
         }
 
         void cadastrarBenfeitorInput(){
@@ -404,6 +406,7 @@ class ONG{
             cout << "d -> Realizar Doacao pelo Nome do Benfeitor" << endl;
             cout << "p -> Procurar Doacao em Benfeitores" << endl;
             cout << "l -> Listar Benfeitores Cadastrados" << endl;
+            cout << "m -> Procurar Maior Empresa Benfeitora" << endl;
             cout << "j -> Procurar Empresas Benfeitoras" << endl;
             cout << "v -> Visualizar Registros" << endl;
             cout << "f -> Finalizar Secao" << endl;
@@ -414,6 +417,29 @@ class ONG{
             transform(vStr.begin(), vStr.end(), vStr.begin(), ::tolower); 
             return (str == vStr);
         }
+
+        void procurarMaiorEmpresaBenfeitora(){
+            int maiorValor = 0;
+            int indiceEmpresa = 0;
+
+            for (int i = 0; i < getNumeroBenfeitores(); i++){
+                if (_benfeitores[i]->getTipoPessoaJuridica()){
+                        if (maiorValor < _benfeitores[i]->getValorTotalDoacao()){
+                            indiceEmpresa = i;
+                            maiorValor = _benfeitores[i]->getValorTotalDoacao();
+                        }
+                    }
+                }
+
+            if (maiorValor > 0){
+                    cout << "NOME DA MAIOR EMPRESA BENFEITORA: " << _benfeitores[indiceEmpresa]->getNomeBenfeitor() << " " << endl;
+                    cout << "MONTANTE DOADO: R$" << _benfeitores[indiceEmpresa]->getValorTotalDoacao() << " " << endl;
+                    cout << "QUANTIDADE DE DOACOES: " << _benfeitores[indiceEmpresa]->getQtdDoacao() << " " << endl;
+                    cout << endl;
+                } else {
+                    cout << "NAO HA EMPRESAS CADASTRADAS " << endl;
+                }
+            }
 };
 
 void Benfeitor::adicionarDoacao(int v, ONG* ong){
@@ -430,7 +456,7 @@ int main(){
     ong.cadastrarBenfeitor("Joao");
     ong.cadastrarBenfeitor("Amanda", 50);
     ong.cadastrarBenfeitor("Gabriel", 250);
-    ong.cadastrarBenfeitor("Petrobras", 25000, true);
+    // ong.cadastrarBenfeitor("Petrobras", 25000, true);
     ong.adicionarDoacaoPorBenfeitor("Gabriel",1000);
     
     ong._benfeitores[0]->adicionarDoacao(1000, &ong);
@@ -475,6 +501,10 @@ int main(){
              }
              case 'l':{
                  ong.listarBenfeitoresCadastrados();
+                 break;
+             }
+             case 'm':{
+                 ong.procurarMaiorEmpresaBenfeitora();
                  break;
              }
              case 'v':{
