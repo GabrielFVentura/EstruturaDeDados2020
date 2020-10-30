@@ -68,7 +68,9 @@ class Curador{
             artistas = new Artista[100];
             entusiastas = new Entusiasta[100];
         }
-        void cadastrarArtista(){
+        int getArtistasCadastrados(){return artistasCadastrados;}
+
+        void cadastrarArtistaInput(){
             string nomeArtista;
             string telefoneArtista;
             string enderecoAtelie;
@@ -79,7 +81,11 @@ class Curador{
             cout << "ENDERECO DO ATELIE: " << endl;
             cin >> enderecoAtelie;
 
-            Artista* artTemp = new Artista(nomeArtista, string telefoneArtista, string enderecoAtelie);
+            cadastrarArtista(nomeArtista, string telefoneArtista, string enderecoAtelie);
+        }
+        void cadastrarArtista(string n, string t, string e){
+            Artista* artTemp = new Artista(n, t, e);
+            artistas[getArtistasCadastrados()] = &artTemp;
         }
 
 };
