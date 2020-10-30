@@ -404,6 +404,7 @@ class ONG{
             cout << "d -> Realizar Doacao pelo Nome do Benfeitor" << endl;
             cout << "p -> Procurar Doacao em Benfeitores" << endl;
             cout << "l -> Listar Benfeitores Cadastrados" << endl;
+            cout << "m -> Procurar Maior Empresa Benfeitora" << endl;
             cout << "j -> Procurar Empresas Benfeitoras" << endl;
             cout << "v -> Visualizar Registros" << endl;
             cout << "f -> Finalizar Secao" << endl;
@@ -414,6 +415,31 @@ class ONG{
             transform(vStr.begin(), vStr.end(), vStr.begin(), ::tolower); 
             return (str == vStr);
         }
+
+        void procurarMaiorEmpresaBenfeitora(){
+            Benfeitor* tempBenf[getNumeroBenfeitores()];
+            int numeroEmpresaBenfeitoras = 0;
+            int maiorValor = 0;
+            int indiceEmpresa = 0;
+
+            for (int i = 0; i < getNumeroBenfeitores(); i++){
+                if (_benfeitores[i]->getTipoPessoaJuridica()){
+                        if (maiorValor < _benfeitores[i]->getValorTotalDoacao()){
+                            indiceEmpresa = i;
+                            maiorValor = _benfeitores[i]->getValorTotalDoacao();
+                        }
+                    }
+                }
+
+            if (maiorValor > 0){
+                    cout << "NOME DA MAIOR EMPRESA BENFEITORA: " << _benfeitores[indiceEmpresa]->getNomeBenfeitor() << " " << endl;
+                    cout << "MONTANTE DOADO: R$" << _benfeitores[indiceEmpresa]->getValorTotalDoacao() << " " << endl;
+                    cout << "QUANTIDADE DE DOACOES: " << _benfeitores[indiceEmpresa]->getQtdDoacao() << " " << endl;
+                    cout << endl;
+                } else {
+                    cout << "NAO HA EMPRESAS CADASTRADAS " << endl;
+                }
+            }
 };
 
 void Benfeitor::adicionarDoacao(int v, ONG* ong){
@@ -430,7 +456,7 @@ int main(){
     ong.cadastrarBenfeitor("Joao");
     ong.cadastrarBenfeitor("Amanda", 50);
     ong.cadastrarBenfeitor("Gabriel", 250);
-    ong.cadastrarBenfeitor("Petrobras", 25000, true);
+    // ong.cadastrarBenfeitor("Petrobras", 25000, true);
     ong.adicionarDoacaoPorBenfeitor("Gabriel",1000);
     
     ong._benfeitores[0]->adicionarDoacao(1000, &ong);
@@ -475,6 +501,10 @@ int main(){
              }
              case 'l':{
                  ong.listarBenfeitoresCadastrados();
+                 break;
+             }
+             case 'm':{
+                 ong.procurarMaiorEmpresaBenfeitora();
                  break;
              }
              case 'v':{
