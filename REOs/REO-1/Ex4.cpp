@@ -112,10 +112,12 @@ class Benfeitor{
         Benfeitor(string n){
             _nomeBenfeitor = n;
             _qtdDoacao = 0;
+            _valorTotalDoacaoBenfeitor = 0;
         }
-        Benfeitor(string n, int v, bool pj = false){
+        Benfeitor(string n, int v = 0, bool pj = false){
             _tipoPessoaJuridica = pj;
             _nomeBenfeitor = n;
+            _valorTotalDoacaoBenfeitor = 0;
             if (v != 0){
                 _valorDoacao[getQtdDoacao()] = v;
                 _valorTotalDoacaoBenfeitor += v;
@@ -203,7 +205,6 @@ class ONG{
         }
 
         void cadastrarBenfeitor(string nomeBenfeitor, int v = 0, bool pj = false){
-            string verificarDoacao;
 
             Benfeitor* benf = new Benfeitor(nomeBenfeitor, v, pj);
             _benfeitores[_numeroBenfeitores] = benf;
@@ -454,9 +455,9 @@ int main(){
     char command;
     ONG ong;
     ong.cadastrarBenfeitor("Joao");
-    ong.cadastrarBenfeitor("Amanda", 50);
+    ong.cadastrarBenfeitor("Josy", 50);
     ong.cadastrarBenfeitor("Gabriel", 250);
-    // ong.cadastrarBenfeitor("Petrobras", 25000, true);
+    ong.cadastrarBenfeitor("Petrobras", 25000, true);
     ong.adicionarDoacaoPorBenfeitor("Gabriel",1000);
     
     ong._benfeitores[0]->adicionarDoacao(1000, &ong);
