@@ -74,7 +74,7 @@ class Ponto {
 };
 
 int main(){
-    Ponto ponto1(2, 3);
+    Ponto ponto1(1, 3);
     Ponto ponto2(4, 5);
 
     Ponto ponto3 = ponto1 + ponto2;
