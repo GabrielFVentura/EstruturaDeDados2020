@@ -27,6 +27,7 @@ class Artista{
             _telefoneArtista = t;
             _enderecoAtelie = e;
         }
+        Artista(){}
 };
 
 class Entusiasta{
@@ -54,7 +55,7 @@ class Entusiasta{
             _valorUltimaObra = v;
             _nomeUltimaObra = nObra;
         }
-
+        Entusiasta(){}
 };
 
 class Curador{
@@ -79,9 +80,8 @@ class Curador{
             cout << "ENDERECO DO ATELIE: " << endl;
             cin >> enderecoAtelie;
 
-            Artista* artTemp = new Artista(nomeArtista, string telefoneArtista, string enderecoAtelie);
+            Artista* artTemp = new Artista(nomeArtista, telefoneArtista, enderecoAtelie);
         }
-
 };
 
 int main(){
