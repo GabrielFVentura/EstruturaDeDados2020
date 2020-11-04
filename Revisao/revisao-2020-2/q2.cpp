@@ -37,18 +37,25 @@ int main(){
 
     int indiceDef = 0;
     for (int i = 0;i < 8;i++){
-        if (valoresDef[0] == 0){
+        if (valoresDef[indiceDef] == 0){
             valoresDef[indiceDef] = valores[i];
-        } else if (valoresDef[indiceDef-1] > valores[i]){
+        } else if (valoresDef[0] > valores[i]){
+            int valoresTemp[indiceDef];
+            for (int i = 0; i < indiceDef; i++){
+                valoresTemp[i+1] = valoresDef[i];                
+                cout << valoresTemp[i+1] << endl;
+            }
+        } else {
             int temp = valoresDef[indiceDef-1];
             valoresDef[indiceDef-1] = valores[i];
-            valoresDef[indiceDef] = temp;
-        } 
-        indiceDef++;
-        for (int i = 0; i < indiceDef;i++){
-            cout << valoresDef[i] << " ";
+            valores[indiceDef] = temp;
         }
-        cout << endl;
+        indiceDef++;
+
+         for (int i = 0; i < indiceDef;i++){
+             cout << valoresDef[i] << " ";
+         }
+         cout << endl;
     }
 
 
