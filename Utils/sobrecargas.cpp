@@ -6,9 +6,9 @@ class Ponto {
         int _x;
         int _y;
     public:
-    Ponto(int i = 0, int j = 0){
-        _x = i;
-        _y = j;
+    Ponto(int x = 0, int y = 0){
+        _x = x;
+        _y = y;
     }
 
     int getX(){return _x;}

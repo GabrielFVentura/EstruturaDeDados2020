@@ -1,4 +1,5 @@
-/*Crie um registro para representar alunos, contendo nome, média na disciplina e número de faltas. Faça um programa que leia as informações de N alunos em um vetor alocado dinamicamente. Imprima os nomes dos alunos na ordem decrescente das médias dos alunos.
+/*Crie um registro para representar alunos, contendo nome, média na disciplina e número de faltas. Faça um programa que leia as informações de N alunos em um vetor alocado dinamicamente. 
+Imprima os nomes dos alunos na ordem decrescente das médias dos alunos.
 
 Entradas:
 
