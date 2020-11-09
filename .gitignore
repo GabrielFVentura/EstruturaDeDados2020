@@ -1,0 +1,4 @@
+/Revisao/revisao-2020-1/*.exe
+*.exe
+/Revisao/revisao-2020-2/.vscode/*.json
+*.json

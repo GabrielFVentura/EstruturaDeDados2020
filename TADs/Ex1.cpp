@@ -52,7 +52,16 @@ class FFR {
             
         };
    	 long calculaFet (int n){
-
+            if (n == 0){
+                return termo1;
+            }
+            if (n == 1){
+                return termo2;
+            }
+            else if (n >= 2 && n%2 == 0){
+                return calculaFet(n-1)+calculaFet(n-2);
+            }
+            return calculaFet(n-1)-calculaFet(n-2);
         };
    	 long calculaRic (int n){
             if (n == 0){
@@ -75,7 +84,14 @@ class FFR {
             return arr;
         };
    	 long* calculaSeqFet (int n){
-        
+            long* arr = new long[n];
+            for (int i = 0;i <= n; i++){
+                arr[i] = calculaFet(i);
+            }
+            for (int i = 0; i <= n; i++){
+                cout << arr[i] << " ";
+            }
+            return arr;
         };
    	 long* calculaSeqRic (int n){
             long* arr = new long[n];
@@ -121,14 +137,16 @@ int main(){
     int tipoInput;
     int termo1;
     int termo2;
-
-    cin >> tipoInput;
     int n;
+
+    cout << "ESCOLHA O TIPO DE SEQUENCIA: " << endl << "0 - Fibonnaci" << endl << "1 - Fettuccini" << endl << "2 - Ricci" << endl;
+    cin >> tipoInput;
     tipo tipoEscolhido = (tipo)tipoInput;
 
     if (tipoEscolhido == 0){
         cout << "Sequencia de fibonnacci escolhida " << endl;
         FFR ffr(tipoEscolhido);
+        cout << "Quantos termos deseja calcular?" << endl;
         cin >> n;
         ffr.calculaSequencia(n);
     } else {
@@ -141,7 +159,7 @@ int main(){
         cin >> termo1;
         cout << "SEGUNDO TERMO: " << endl;
         cin >> termo2;
-        cout << "ATE QUAL TERMO: " << endl;
+        cout << "Quantos termos deseja calcular?" << endl;
         cin >> n;
         FFR ffr(tipoEscolhido,termo1,termo2);
         ffr.calculaSequencia(n);
