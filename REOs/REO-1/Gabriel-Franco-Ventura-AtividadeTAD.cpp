@@ -381,7 +381,7 @@ class ONG{
         }
 
         void listarAnimaisCadastrados(){
-            for (int i = 0; i < getNumeroAnimais(); i++){
+            for (int i = 0;i < getNumeroAnimais(); i++){
                 cout << "NOME DO ANIMAL: " << _animaisResgatados[i]->getNomeAnimal() <<
                     " ESPECIE DO ANIMAL: " << _animaisResgatados[i]->getEspecie() << 
                     " LOCAL DO RESGATE: " << _animaisResgatados[i]->getLocalResgate() << 
