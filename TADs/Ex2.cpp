@@ -4,7 +4,20 @@ em que  abs(a + bi) é dado por sqrt(a2 + b2),
 (a + b) * (c + di) é (a * c – b * d) + (a * d + b * c)i e
 –(a + bi) é (-a) + (-b)i. Então,
 implemente em C/C++ números complexos, conforme especificado acima, usando estruturas com partes reais e complexas. Sobrescreva 
-operadores para imprimir, somar, multiplicar e negar (inverter) tais números.*/
+operadores para imprimir, somar, multiplicar e negar (inverter) tais números.
+
+____________________________________________________________________________________
+|                                                                                   |
+|                                                                                   |
+|                        Estruturas de Dados, 2020/2                                |
+|                                                                                   |
+|                                                                                   |
+|                    Solução de: GABRIEL FRANCO VENTURA SANTOS                      |
+|                                                                                   |
+|                                                                                   |
+|___________________________________________________________________________________|
+
+*/
 
 #include <iostream>
 #include <math.h>

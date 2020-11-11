@@ -7,7 +7,18 @@ class fracao  {
 
 Sobrescreva operadores para imprimir, somar, dividir, multiplicar e negar (inverter) frações. Sobrescreva também os operadores de comparação
  (>, <, >=, <= e ==). Dica: um método para verificar a igualdade é multiplicar o denominador de cada número pelo numerador do outro e testar 
- a igualdade dos dois produtos. Os operadores < e > podem ser implementadas por meio de divisão em ponto flutuante. */
+ a igualdade dos dois produtos. Os operadores < e > podem ser implementadas por meio de divisão em ponto flutuante. 
+____________________________________________________________________________________
+|                                                                                   |
+|                                                                                   |
+|                        Estruturas de Dados, 2020/2                                |
+|                                                                                   |
+|                                                                                   |
+|                    Solução de: GABRIEL FRANCO VENTURA SANTOS                      |
+|                                                                                   |
+|                                                                                   |
+|___________________________________________________________________________________|
+ */
 
 #include <iostream>
 using namespace std;

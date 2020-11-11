@@ -9,7 +9,20 @@ qual o comportamento esperado (os métodos) de cada entidade. Com base nesse pla
 deve ser orientada a objetos, com a definição de cada uma das classes, utilizando as diretivas de visibilidade adequadas, os métodos que representem o 
 comportamento de cada classe e um pequeno programa (main) que as utilize para solucionar o problema apresentado.
 Você deve tomar as decisões de projeto que achar adequada (definição de tamanho de arranjos, tipo da variável, etc.) e indicar essas decisões no cabeçalho do
-código. Você deverá entregar o planejamento realizado (atividade manual) e o código desenvolvido (atividade prática)*/
+código. Você deverá entregar o planejamento realizado (atividade manual) e o código desenvolvido (atividade prática)
+
+____________________________________________________________________________________
+|                                                                                   |
+|                                                                                   |
+|                        Estruturas de Dados, 2020/2                                |
+|                                                                                   |
+|                                                                                   |
+|                    Solução de: GABRIEL FRANCO VENTURA SANTOS                      |
+|                                                                                   |
+|                                                                                   |
+|___________________________________________________________________________________|
+
+*/
 
 #include <iostream>
 using namespace std;

@@ -10,7 +10,19 @@ intersecao(A,B) – Retorna um novo conjunto A ∩ B, formado pela interseção 
 diferenca(A,B) – Retorna um novo conjunto A - B, formado pelos elementos de A que não fazem parte de B.
 
 Neste exercício, você deverá implementar as operações básicas de conjuntos listadas anteriormente, armazenando os dados em um vetor. Sobrecarregue os operadores de atribuição, 
-comparação, bem como o operador + (para união), o operador * (para interseção) e o operador - (para diferença de conjuntos). */
+comparação, bem como o operador + (para união), o operador * (para interseção) e o operador - (para diferença de conjuntos).
+____________________________________________________________________________________
+|                                                                                   |
+|                                                                                   |
+|                        Estruturas de Dados, 2020/2                                |
+|                                                                                   |
+|                                                                                   |
+|                    Solução de: GABRIEL FRANCO VENTURA SANTOS                      |
+|                                                                                   |
+|                                                                                   |
+|___________________________________________________________________________________|
+
+*/
 
 #include <iostream>
 using namespace std;

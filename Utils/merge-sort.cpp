@@ -1,3 +1,15 @@
+/*____________________________________________________________________________________
+|                                                                                   |
+|                                                                                   |
+|                        Estruturas de Dados, 2020/2                                |
+|                                                                                   |
+|                                                                                   |
+|                    Solução de: GABRIEL FRANCO VENTURA SANTOS                      |
+|                                                                                   |
+|                                                                                   |
+|___________________________________________________________________________________|
+*/
+
 // C++ program for Merge Sort 
 #include<iostream>
 using namespace std;

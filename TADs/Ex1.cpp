@@ -29,7 +29,19 @@ class FFR {
    	 long calculaTermo (int n); //calcula o n-esimo termo
    	 long* calculaSequencia (int n); // retorna um vetor com os 
     // n primeiros termos
-};*/
+};
+
+____________________________________________________________________________________
+|                                                                                   |
+|                                                                                   |
+|                        Estruturas de Dados, 2020/2                                |
+|                                                                                   |
+|                                                                                   |
+|                    Solução de: GABRIEL FRANCO VENTURA SANTOS                      |
+|                                                                                   |
+|                                                                                   |
+|___________________________________________________________________________________|
+*/
 
 #include <iostream>
 using namespace std;

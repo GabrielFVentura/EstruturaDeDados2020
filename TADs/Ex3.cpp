@@ -17,7 +17,20 @@ d.right = 101;
 d.precision = 5;
 representa o valor 20.00101.
 
-Após implementar as operações básicas em decimais, sobrescreva operadores para imprimir, somar, multiplicar e negar (inverter) decimais. */
+Após implementar as operações básicas em decimais, sobrescreva operadores para imprimir, somar, multiplicar e negar (inverter) decimais. 
+
+____________________________________________________________________________________
+|                                                                                   |
+|                                                                                   |
+|                        Estruturas de Dados, 2020/2                                |
+|                                                                                   |
+|                                                                                   |
+|                    Solução de: GABRIEL FRANCO VENTURA SANTOS                      |
+|                                                                                   |
+|                                                                                   |
+|___________________________________________________________________________________|
+*/
+
 
 #include <bits/stdc++.h> 
 using namespace std;

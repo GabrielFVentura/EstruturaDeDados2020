@@ -11,6 +11,18 @@ com a definição de cada uma das classes, utilizando as diretivas de visibilida
 programa (main) que as utilize para solucionar o problema apresentado.
 Você deve tomar as decisões de projeto que achar adequada (definição de tamanho de arranjos, tipo da variável, etc.) e indicar essas decisões no cabeçalho do código.
 Você deverá entregar o planejamento realizado (atividade manual) e o código desenvolvido (atividade prática)
+
+____________________________________________________________________________________
+|                                                                                   |
+|                                                                                   |
+|                        Estruturas de Dados, 2020/2                                |
+|                                                                                   |
+|                                                                                   |
+|                    Solução de: GABRIEL FRANCO VENTURA SANTOS                      |
+|                                                                                   |
+|                                                                                   |
+|___________________________________________________________________________________|
+
 */
 
 #include <iostream>
