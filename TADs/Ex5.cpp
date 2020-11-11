@@ -27,12 +27,116 @@ ________________________________________________________________________________
 #include <iostream>
 using namespace std;
 
-int f1(float n){
-    return n;
-}
+class Set{
+    private:
+        int* _arrayElementos;
+        int _numeroElementos;
+    public:
+        Set(int t){
+            _arrayElementos = new int[t];
+            _numeroElementos = 0;
+        }
+        Set(){}
+        int* getArrayElementos(){return _arrayElementos;}
+        int getNumeroElementos(){return _numeroElementos;}
+        void setNumeroElementos(int* arr){_arrayElementos = arr;}
+
+        void incrementaNumeroElementos(){ _numeroElementos++;}
+
+        bool membro(Set* s, int x){
+            for (int i = 0; i < s->getNumeroElementos(); i++){
+                if (s->getArrayElementos()[i] == x){
+                    return true;
+                }
+            }
+            return false;
+        }
+        void adiciona(Set* s, int x){
+            if (!(s->membro(s,x))){
+                s->getArrayElementos()[getNumeroElementos()] = x;
+                s->incrementaNumeroElementos();
+            } else {
+                cout << "ELEMENTA JA INSERIDO" << endl;
+            }
+        }
+        void remove(Set* s, int x){
+            for (int i = 0; i < s->getNumeroElementos(); i++){
+                if (s->getArrayElementos()[i] == x){
+                    s->getArrayElementos()[i] = 0;
+                }
+            }
+        }
+        void imprimi(Set* s){
+            if (s->getNumeroElementos() > 0){
+                for (int i = 0; i < s->getNumeroElementos();i++){
+                    cout << s->getArrayElementos()[i] << " ";
+                }
+            } else {
+                cout << "{}" << endl;
+            }
+            
+        }
+        int* uniao(Set* A, Set* B){
+            int tamanhoConjuntoUniao = A->getNumeroElementos() + B->getNumeroElementos();
+            int* arrTemp = new int[tamanhoConjuntoUniao];
+            for (int i = 0; i < A->getNumeroElementos();i++){
+                arrTemp[i] = A->getArrayElementos()[i];
+            }
+            for (int i = A->getNumeroElementos(); i < B->getNumeroElementos(); i++){
+                arrTemp[i] = B->getArrayElementos()[i];
+            }
+            return arrTemp;
+        }
+
+        Set operator+(Set& s){
+            Set setTemp(_numeroElementos + s.getNumeroElementos());
+
+            for (int i = 0; i < getNumeroElementos(); i++){
+               setTemp._arrayElementos[i] = getArrayElementos()[i];
+               cout << "arrayElementos[" << i << "]: " << getArrayElementos()[i] << " ";
+            }
+            cout << endl;
+            for (int i = getNumeroElementos(); i < _numeroElementos+s.getNumeroElementos();i++){
+                setTemp._arrayElementos[i] = s._arrayElementos[i];
+                cout << "s.arrayElementos[" << i << "]: " << s._arrayElementos[i] << " ";
+            }
+            cout << endl;
+
+            return setTemp;
+        }
+};
 
 int main(){
-   float n = 5.5;
-    cout << f1(n);
+    int n;
+    cout << "TAMANHO DO CONJUNTO" << endl;
+    cin >> n;
+    int k;
+    Set setA(n);
+    for (int i = 0; i < n; i++){
+        cout << "setA[" << i << "] ";
+        cin >> k;
+        setA.adiciona(&setA, k);
+    }
+
+    setA.imprimi(&setA);
+    cout << endl;
+
+    Set setB(n);
+    for (int i = 0; i < n; i++){
+        cout << "setB[" << i << "] ";
+        cin >> k;
+        setB.adiciona(&setB, k);
+    }
+    cout << endl;
+
+    setB.imprimi(&setB);
+
+    setA.setNumeroElementos(setA.uniao(&setA,&setB));
+    setA.imprimi(&setA);
+
+    Set setC;
+    setC = setA+setB;
+    setC.imprimi(&setC);
+
     return 0;
 }
