@@ -78,7 +78,7 @@ class Set{
             }
             return Set(_arrayElementos,_numeroElementos);
         }
-
+        //REMOVER
         Set operator-(int v){
             int* tempArray = new int[_numeroElementos-1];
             int tamanhoArrayTemp = 0;
