@@ -47,6 +47,7 @@ class biblioteca {
         int capacidadeMaxima;
     public:
         biblioteca(int capacidade);
+        biblioteca(const biblioteca&);
         ~biblioteca();
         void inserirNovolivro(const livro& umlivro);
         bool buscarlivro(const string& nome, livro& umlivro);
@@ -58,6 +59,17 @@ biblioteca::biblioteca(int capacidade) {
     quantidadeDeItens = 0;
     capacidadeMaxima = capacidade;
     listaDeLivros = new livro[capacidadeMaxima];
+}
+
+biblioteca::biblioteca(const biblioteca& biblioteca) {
+    cout << "CONSTRUTOR DE COPIA CHAMADO" << endl;
+    quantidadeDeItens = biblioteca.quantidadeDeItens;
+    capacidadeMaxima = biblioteca.capacidadeMaxima;
+    listaDeLivros = new livro[capacidadeMaxima];
+    
+    for (int i = 0; i < quantidadeDeItens;i ++){
+        listaDeLivros[i] = biblioteca.listaDeLivros[i];
+    }
 }
 
 biblioteca::~biblioteca() {
@@ -89,17 +101,17 @@ bool biblioteca::buscarlivro(const string& nome, livro& umlivro) {
 }
 
 void biblioteca::redimensionarCapacidade() {
-    cout << "expandi array" << endl;
+    cout << "EXPANDI ARRAY" << endl;
     int novaCapacidade = ceil(capacidadeMaxima*1.2);
     livro* listaTemp = new livro[novaCapacidade];
-    cout << "cap max antes: " << capacidadeMaxima << endl;
+    cout << "CAP MAX ANTES: " << capacidadeMaxima << endl;
     for (int i = 0; i < capacidadeMaxima; i++){
         listaTemp[i] = listaDeLivros[i];
     }
     capacidadeMaxima = novaCapacidade;
     delete [] listaDeLivros;
     listaDeLivros = listaTemp;
-    cout << "cap max dps: " << capacidadeMaxima << endl;
+    cout << "CAP MAX DEPOIS: " << capacidadeMaxima << endl;
 #warning implemente este metodo!
 }
 
