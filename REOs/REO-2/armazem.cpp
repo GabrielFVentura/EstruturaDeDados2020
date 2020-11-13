@@ -61,7 +61,7 @@ armazem::armazem(int capacidade) {
 }
 
 armazem::~armazem() {
-    delete [] listaDeItens;
+    cout << "DESTRUTOR CHAMADO" << endl;
 }
 
 void armazem::inserirNovoItem(const item& umItem) {
@@ -89,6 +89,21 @@ bool armazem::buscarItem(const string& nome, item& umItem) {
 }
 
 void armazem::redimensionarCapacidade() {
+    cout << "expandi array" << endl;
+    int novaCapacidade = 2*capacidadeMaxima;
+    item* listaTemp = new item[novaCapacidade];
+    cout << "cap max antes: " << capacidadeMaxima << endl;
+    for (int i = 0; i < quantidadeDeItens; i++){
+        listaTemp[i].nomeDoProduto = listaDeItens[i].nomeDoProduto;
+        listaTemp[i].quantidadeEmQuilos = listaTemp[i].quantidadeEmQuilos;
+        listaTemp[i].validadeEmDias = listaTemp[i].validadeEmDias;
+        cout << " listaTemp[" << i << "].nomeDoProduto: " << listaTemp[i].nomeDoProduto;
+    }
+    cout << endl;
+    capacidadeMaxima = novaCapacidade;
+    delete [] listaDeItens;
+    listaDeItens = listaTemp;
+    cout << "cap max dps: " << capacidadeMaxima << endl;
 #warning implemente este metodo!
 }
 
