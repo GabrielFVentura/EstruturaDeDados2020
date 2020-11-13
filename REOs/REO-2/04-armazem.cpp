@@ -5,10 +5,10 @@ No momento, ele só permite a inserção e busca de produtos. Falta implementar,
 inclusive, o redimensionamento do vetor de itens. O redimensionamento ocorrerá de 
 acordo com a estratégia que foi sorteada para você. Além disso, foi desenvolvida 
 uma função externa à classe para verificar a existência de itens próximos ao vencimento.
- A função já está testada e não pode ser alterada. Entretanto, o uso dessa função 
- gera falha de segmentação. A interface do programa (a função main()) também não pode 
- ser alterada, bem como os atributos privados da classe. Sua tarefa é corrigir o problema
-  com essa função externa, bem como implementar o redimensionamento do vetor de itens.
+A função já está testada e não pode ser alterada. Entretanto, o uso dessa função 
+gera falha de segmentação. A interface do programa (a função main()) também não pode 
+ser alterada, bem como os atributos privados da classe. Sua tarefa é corrigir o problema
+com essa função externa, bem como implementar o redimensionamento do vetor de itens.
 
 /---------------------------------------------------------------------------------/
 
@@ -47,21 +47,40 @@ class armazem {
         int capacidadeMaxima;
     public:
         armazem(int capacidade);
+        armazem(const armazem& armazem);
         ~armazem();
         void inserirNovoItem(const item& umItem);
         bool buscarItem(const string& nome, item& umItem);
         void redimensionarCapacidade();
+        int getQuantidadeDeItens(){return quantidadeDeItens;}
+        int getCapacidadeMaxima(){return capacidadeMaxima;}
+        item* getListaDeItens(){return listaDeItens;}
+        
         friend void verificarItensPertoDoVencimento(armazem umArmazem, int dias);
 };
 
 armazem::armazem(int capacidade) {
+    cout << "CONSTRUTOR PADRAO" << endl;
     quantidadeDeItens = 0;
     capacidadeMaxima = capacidade;
     listaDeItens = new item[capacidadeMaxima];
 }
 
+armazem::armazem(const armazem& armazem) {
+    cout << "CONSTRUTOR ALTERNATIVO CHAMADO" << endl;
+    quantidadeDeItens = armazem.quantidadeDeItens;
+    capacidadeMaxima = armazem.capacidadeMaxima;
+    listaDeItens = new item[capacidadeMaxima];
+    
+    for (int i = 0; i < quantidadeDeItens;i ++){
+        listaDeItens[i] = armazem.listaDeItens[i];
+    }
+}
+
+
 armazem::~armazem() {
     cout << "DESTRUTOR CHAMADO" << endl;
+    delete [] listaDeItens;
 }
 
 void armazem::inserirNovoItem(const item& umItem) {
@@ -89,21 +108,18 @@ bool armazem::buscarItem(const string& nome, item& umItem) {
 }
 
 void armazem::redimensionarCapacidade() {
-    cout << "expandi array" << endl;
-    int novaCapacidade = 2*capacidadeMaxima;
+    cout << "EXPANDI ARRAY" << endl;
+    int novaCapacidade = capacidadeMaxima*2;
     item* listaTemp = new item[novaCapacidade];
-    cout << "cap max antes: " << capacidadeMaxima << endl;
-    for (int i = 0; i < quantidadeDeItens; i++){
-        listaTemp[i].nomeDoProduto = listaDeItens[i].nomeDoProduto;
-        listaTemp[i].quantidadeEmQuilos = listaTemp[i].quantidadeEmQuilos;
-        listaTemp[i].validadeEmDias = listaTemp[i].validadeEmDias;
-        cout << " listaTemp[" << i << "].nomeDoProduto: " << listaTemp[i].nomeDoProduto;
+    cout << "CAP MAX ANTES: " << capacidadeMaxima << endl;
+    for (int i = 0; i < quantidadeDeItens ; i ++){
+        listaTemp[i] = listaDeItens[i];
     }
-    cout << endl;
     capacidadeMaxima = novaCapacidade;
     delete [] listaDeItens;
     listaDeItens = listaTemp;
-    cout << "cap max dps: " << capacidadeMaxima << endl;
+    cout << "CAP MAX DEPOIS: " << capacidadeMaxima << endl;
+
 #warning implemente este metodo!
 }
 
