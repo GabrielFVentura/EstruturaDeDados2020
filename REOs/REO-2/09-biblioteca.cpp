@@ -24,6 +24,7 @@ de bilhetes.
 
 #include <iostream>
 #include <cmath>
+#include <algorithm>
 using namespace std;
 
 struct livro {
@@ -105,9 +106,7 @@ void biblioteca::redimensionarCapacidade() {
     int novaCapacidade = ceil(capacidadeMaxima*1.2);
     livro* listaTemp = new livro[novaCapacidade];
     cout << "CAP MAX ANTES: " << capacidadeMaxima << endl;
-    for (int i = 0; i < capacidadeMaxima; i++){
-        listaTemp[i] = listaDeLivros[i];
-    }
+    copy(&listaDeLivros[0],&listaDeLivros[capacidadeMaxima],&listaTemp[0]);
     capacidadeMaxima = novaCapacidade;
     delete [] listaDeLivros;
     listaDeLivros = listaTemp;
