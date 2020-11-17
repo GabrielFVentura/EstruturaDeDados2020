@@ -22,6 +22,7 @@ com essa função externa, bem como implementar o redimensionamento do vetor de 
 /---------------------------------------------------------------------------------/
 */
 
+#include <algorithm>
 #include <iostream>
 
 using namespace std;
@@ -67,15 +68,16 @@ armazem::armazem(int capacidade) {
 }
 
 armazem::armazem(const armazem& armazem) {
-    cout << "CONSTRUTOR DE COPIA CHAMADO" << endl;
+    cout << "CONSTRUTOR ALTERNATIVO CHAMADO" << endl;
     quantidadeDeItens = armazem.quantidadeDeItens;
     capacidadeMaxima = armazem.capacidadeMaxima;
     listaDeItens = new item[capacidadeMaxima];
-
+    
     for (int i = 0; i < quantidadeDeItens;i ++){
         listaDeItens[i] = armazem.listaDeItens[i];
     }
 }
+
 
 armazem::~armazem() {
     cout << "DESTRUTOR CHAMADO" << endl;
@@ -111,10 +113,7 @@ void armazem::redimensionarCapacidade() {
     int novaCapacidade = capacidadeMaxima*2;
     item* listaTemp = new item[novaCapacidade];
     cout << "CAP MAX ANTES: " << capacidadeMaxima << endl;
-    for (int i = 0; i < quantidadeDeItens ; i ++){
-        
-        listaTemp[i] = listaDeItens[i];
-    }
+    copy(&listaDeItens[0],&listaDeItens[capacidadeMaxima],&listaTemp[0]);
     capacidadeMaxima = novaCapacidade;
     delete [] listaDeItens;
     listaDeItens = listaTemp;
