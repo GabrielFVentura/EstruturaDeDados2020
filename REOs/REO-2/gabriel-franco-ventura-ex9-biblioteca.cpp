@@ -72,6 +72,7 @@ biblioteca::biblioteca(const biblioteca& biblioteca) {
 }
 
 biblioteca::~biblioteca() {
+    cout << "DESTRUTOR CHAMADO" << endl;
     delete [] listaDeLivros;
 }
 
