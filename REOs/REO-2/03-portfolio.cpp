@@ -23,6 +23,7 @@ No momento, ele só permite a inserção e busca de produtos. Falta implementar,
 */
 
 #include <iostream>
+#include <algorithm>
 
 using namespace std;
 
@@ -47,6 +48,7 @@ class portfolio {
         int capacidadeMaxima;
     public:
         portfolio(int capacidade);
+        portfolio(portfolio &port);
         ~portfolio();
         void inserirNovoProduto(const produto& umProduto);
         bool buscarProduto(const string& nome, produto& umProduto);
@@ -58,6 +60,16 @@ portfolio::portfolio(int capacidade) {
     quantidadeDeProdutos = 0;
     capacidadeMaxima = capacidade;
     listaDeProdutos = new produto[capacidadeMaxima];
+}
+
+portfolio::portfolio(portfolio &port){
+    quantidadeDeProdutos = port.quantidadeDeProdutos;
+    capacidadeMaxima = port.capacidadeMaxima;
+    listaDeProdutos = new produto[capacidadeMaxima];
+
+    for (int i = 0;i < quantidadeDeProdutos; i++){
+        listaDeProdutos[i] = port.listaDeProdutos[i];
+    }
 }
 
 portfolio::~portfolio() {
@@ -89,6 +101,14 @@ bool portfolio::buscarProduto(const string& nomeParaBusca, produto& umProduto) {
 }
 
 void portfolio::redimensionarCapacidade() {
+    int novaCapacidade = capacidadeMaxima + 4;    
+    produto* listaTemp = new produto[novaCapacidade];
+    copy(&listaDeProdutos[0], &listaDeProdutos[capacidadeMaxima], &listaTemp[0]);
+
+    capacidadeMaxima = novaCapacidade;
+    delete [] listaDeProdutos;
+    listaDeProdutos = listaTemp;
+
 #warning implemente este metodo!
 }
 
