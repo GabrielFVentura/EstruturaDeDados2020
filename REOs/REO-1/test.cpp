@@ -28,6 +28,8 @@ class Ponto{
 int main(){
     Ponto p1(1,1);
     Ponto p2(2,5);
+    Ponto* ptrPonto = &p2;
+    ptrPonto->getX()
 
     cout << "P1 X: " << p1.getX()<< endl;
     cout << "P1 Y: " << p1.getY()<< endl;

@@ -41,7 +41,7 @@ class Animal{
 int main(){
     Animal AnimalUm("zebra",4);
 
-    Animal AnimalDois("cavalo");
+    Animal AnimalDois("cavalo",4);
     AnimalDois.setNumeroPatas(4);
     
     string Nome = "Gabriel";
