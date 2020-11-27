@@ -1,11 +1,7 @@
 #include <iostream>
-using namespace std;
-
-#include <iostream>
 #include <algorithm>
 #include <cstdlib>
 using namespace std;
-
 
 
 typedef int Dado;
@@ -25,12 +21,8 @@ class MaxHeap{
             return (2*i)+2;
         };
         void arruma(){
-            int numeroArrumacoes = tamanho / 2 - 1;
             for (int i = tamanho / 2 - 1; i >= 0; i--){
                 corrigeDescendo(i);
-                cout << numeroArrumacoes << ": ";
-                printHeap();
-                numeroArrumacoes--;
             }
         };
         void corrigeDescendo(int i){
@@ -75,7 +67,7 @@ class MaxHeap{
         ~MaxHeap(){
             delete [] Heap;
         };
-        void printHeap(){
+        void imprime(){
             for (int i = 0; i < tamanho; i++){
                 cout << Heap[i] << " ";
             }
@@ -107,14 +99,25 @@ class MaxHeap{
 };
 
 int main(){
-    int tamanho;
-    cin >> tamanho;
-    int arr[tamanho];
-    for (int i = 0; i < tamanho; i++){
-        cin >> arr[i];
-    }    
+    int arr[] = {-3,-1,5,7,8,9};
+    int capacidade = 6;
 
-    MaxHeap max(arr,tamanho);
+    MaxHeap* hp = new MaxHeap(arr,capacidade);
+    hp->imprime();
+    for (int i = 0; i < capacidade; i++){
+        cout << hp->retiraRaiz() << ", ";
+    }
+
+    cout << endl;
+    for (int i = 0; i < capacidade; i++){
+        hp->insere(arr[i]);
+    }
+
+    for (int i = 0; i < capacidade; i++){
+        cout << hp->retiraRaiz() << ", ";
+    }
+
+    delete hp;
 
     return 0;
 }
