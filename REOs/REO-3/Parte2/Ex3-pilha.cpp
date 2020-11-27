@@ -87,6 +87,7 @@ public:
         noh* nohTemp = new noh();
         nohTemp->dado = d;
         nohTemp->prox = topo;
+        cout << "VALOR EMPILHADO: " << d << " ";
         topo = nohTemp;
         tamanho++;
     };
@@ -126,21 +127,28 @@ public:
 int acessaElemento(pilha& p1, int elemento){
     int indice = 0;
     int resposta = -1;
+    int tamanhoAux = 0;
+    int indiceResp = 1;
     pilha pilhaAux;
     
     while (!p1.vazia()){
         int valorDesempilhado = p1.desempilha();
         if (valorDesempilhado == elemento){
             resposta = valorDesempilhado;
-            
-        } else { 
+            indiceResp += indice;
+        } else {
             pilhaAux.empilha(valorDesempilhado);
             indice++;
         }
-        
     }
-    cout << indice << endl;
-    pilhaAux.limpaPilha();
+    int vDesempilhado = 0;
+    for (int i = 0; i < indice - 1; i++){
+        vDesempilhado = pilhaAux.desempilha();
+        if (vDesempilhado != 0){
+            p1.empilha(vDesempilhado);
+        }
+    }
+    p1.limpaPilha();
 //  Implementar aqui
 }
 
