@@ -1,12 +1,7 @@
 #include <iostream>
-using namespace std;
-
-#include <iostream>
 #include <algorithm>
 #include <cstdlib>
 using namespace std;
-
-
 
 typedef int Dado;
 
