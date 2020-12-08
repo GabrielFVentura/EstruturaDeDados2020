@@ -87,7 +87,6 @@ public:
         noh* nohTemp = new noh();
         nohTemp->dado = d;
         nohTemp->prox = topo;
-        cout << "VALOR EMPILHADO: " << d << " ";
         topo = nohTemp;
         tamanho++;
     };
@@ -95,27 +94,26 @@ public:
     int desempilha(){
         if (tamanho == 0){
             topo = NULL;
-            tamanho--;
             return -1;
-        } else{
-            noh* nohTemp = topo;
-            int removido = nohTemp->dado;
-            topo = topo->prox;
-            delete nohTemp;
-            tamanho--;
-            return removido;
         }
+        noh* nohTemp = topo;
+        int removido = nohTemp->dado;
+        topo = topo->prox;
+        delete nohTemp;
+        tamanho--;
 
+        return removido;
     }; // retorna o topo da pilha
+
     int espia(){
         return topo->dado;
     }; // espia o topo da pilha
     bool vazia(){
-        return topo == NULL;
+        return tamanho == 0;
     };
     void limpaPilha(){
         while (!vazia()){
-            cout << desempilha() << " ";
+            desempilha();
         }
     }; //limpa a pilha
 };
@@ -126,29 +124,25 @@ public:
 //  Implementar aqui
 int acessaElemento(pilha& p1, int elemento){
     int indice = 0;
-    int resposta = -1;
-    int tamanhoAux = 0;
     int indiceResp = 1;
     pilha pilhaAux;
-    
     while (!p1.vazia()){
         int valorDesempilhado = p1.desempilha();
         if (valorDesempilhado == elemento){
-            resposta = valorDesempilhado;
             indiceResp += indice;
-        } else {
+        } else { 
             pilhaAux.empilha(valorDesempilhado);
             indice++;
         }
     }
-    int vDesempilhado = 0;
-    for (int i = 0; i < indice - 1; i++){
-        vDesempilhado = pilhaAux.desempilha();
-        if (vDesempilhado != 0){
-            p1.empilha(vDesempilhado);
-        }
+    if (indiceResp == 1)
+        indiceResp = -1;
+
+    while (!pilhaAux.vazia()){
+        int valorDesempilhadoAux = pilhaAux.desempilha();
+        p1.empilha(valorDesempilhadoAux);
     }
-    p1.limpaPilha();
+    return indiceResp;
 //  Implementar aqui
 }
 
