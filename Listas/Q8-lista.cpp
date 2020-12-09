@@ -101,6 +101,7 @@ Exemplo de Saída:
 
 #include <iostream>
 #include <stdexcept>
+#include <algorithm>
 
 using namespace std;
 
@@ -190,18 +191,21 @@ bool listarranjo::insereNoInicio(dado d) {
         vetorDados[tamanho] = *nohNovo;
         primeiro = 0;
         ultimo = 0;
+        depura();
         tamanho++;
         return true;
     }
+    noh* nohAux = &vetorDados[ultimo];
+    vetorDados[tamanho] = vetorDados[tamanho - 1];
+    vetorDados[ultimo + 1] = *nohAux;
+    vetorDados[ultimo] = *nohNovo;    
+    depura();
     primeiro = tamanho;
-    vetorDados[primeiro] = *nohNovo;
     tamanho++;
     return true;
-    
     // se a lista estiver vazia, inserimos o último nó
     // já tem elementos na lista, insere no início
 }
-
 
 // Insere no final da lista. Retorna um booleano que indica se foi possivel fazer a insercao.
 bool listarranjo::insereNoFim(dado d) {
@@ -209,9 +213,22 @@ bool listarranjo::insereNoFim(dado d) {
     if (tamanho == capacidade){
         return false;
     }
+    noh* nohNovo = new noh(); 
+    nohNovo->elemento = d;
     // se a lista estiver vazia, inserimos o primeiro nó
+    if (tamanho == 0){
+        vetorDados[tamanho] = *nohNovo;
+        primeiro = 0;
+        ultimo = 0;
+        tamanho++;
+        return true;
+    }
+    ultimo = tamanho;
+    vetorDados[tamanho] = *nohNovo;
+    vetorDados[tamanho - 1].proximo = tamanho;
+    vetorDados[tamanho].anterior = tamanho - 1;
+    tamanho++;
     // se já tem elementos na lista, insere no final
-
 }
 
 bool listarranjo::removeNoInicio() {
@@ -241,8 +258,10 @@ void listarranjo::imprime() {
 
     // imprime reverso (para mostrar duplo encadeamento)
     aux = ultimo;
+    cout << "INVERTIDO" << endl;
+
     while (aux != INVALIDO) {
-        cout << vetorDados[aux].elemento << " ";
+        cout << "vetorDados[" << aux << "]: " << vetorDados[aux].elemento << " ";
         aux = vetorDados[aux].anterior;
     }
     cout << endl;
@@ -267,46 +286,45 @@ int main() {
     char operacao;
     dado valor;
     minhaLista.insereNoInicio(2);
-    minhaLista.imprime();
     minhaLista.insereNoInicio(5);
-    minhaLista.imprime();
     minhaLista.insereNoInicio(7);
-    minhaLista.imprime();
+    minhaLista.insereNoInicio(9);
+    // minhaLista.depura();
 
-    do {
-        cin >> operacao;
-        switch (operacao) {
-             case 'I': // inserir no início
-                cin >> valor;
-                if (not minhaLista.insereNoInicio(valor))
-                    cout << "Lista cheia, incapaz de inserir\n";
-                break;
-            case 'i': // inserir no fim
-                cin >> valor;
-                if (not minhaLista.insereNoFim(valor))
-                    cout << "Lista cheia, incapaz de inserir\n";
-                break;
-            case 'R': // remover no início
-                if (not minhaLista.removeNoInicio())
-                    cout << "Lista vazia, incapaz de remover\n";
-                break;
-            case 'r': // remove no fim
-                if (not minhaLista.removeNoFim())
-                    cout << "Lista vazia, incapaz de remover\n";
-                break;
-            case 'p': // mostrar estrutura
-                minhaLista.imprime();
-                break;
-            case 'd': // depura vetor de dados
-                minhaLista.depura();
-                break;
-            case 's': // sair
-                // será tratado no while
-                break;
-            default:
-                cout << "Opção inválida!" << endl;
-        }
-    } while (operacao != 's');
+    // do {
+    //     cin >> operacao;
+    //     switch (operacao) {
+    //          case 'I': // inserir no início
+    //             cin >> valor;
+    //             if (not minhaLista.insereNoInicio(valor))
+    //                 cout << "Lista cheia, incapaz de inserir\n";
+    //             break;
+    //         case 'i': // inserir no fim
+    //             cin >> valor;
+    //             if (not minhaLista.insereNoFim(valor))
+    //                 cout << "Lista cheia, incapaz de inserir\n";
+    //             break;
+    //         case 'R': // remover no início
+    //             if (not minhaLista.removeNoInicio())
+    //                 cout << "Lista vazia, incapaz de remover\n";
+    //             break;
+    //         case 'r': // remove no fim
+    //             if (not minhaLista.removeNoFim())
+    //                 cout << "Lista vazia, incapaz de remover\n";
+    //             break;
+    //         case 'p': // mostrar estrutura
+    //             minhaLista.imprime();
+    //             break;
+    //         case 'd': // depura vetor de dados
+    //             minhaLista.depura();
+    //             break;
+    //         case 's': // sair
+    //             // será tratado no while
+    //             break;
+    //         default:
+    //             cout << "Opção inválida!" << endl;
+    //     }
+    // } while (operacao != 's');
 
     return 0;
 }
