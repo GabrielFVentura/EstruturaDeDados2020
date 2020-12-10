@@ -204,7 +204,7 @@ bool listarranjo::insereNoInicio(dado d) {
     tamanho++;
     return true;
     // se a lista estiver vazia, inserimos o último nó
-    // já tem elementos na lista, insere no início
+    // já tem elementos na lista, insere no iní cio
 }
 
 // Insere no final da lista. Retorna um booleano que indica se foi possivel fazer a insercao.
